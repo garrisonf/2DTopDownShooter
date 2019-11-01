@@ -164,12 +164,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5aa4a3ea7fac6f44ac8cf222e06341b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogue:
-    name: Player
-    sentences:
-    - Hey there! My name is John...
-    - I'm here to guide you through your dangerous adventures...
-    - And wake you up in the morning of course!
 --- !u!114 &19249411
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -321,6 +315,10 @@ PrefabInstance:
     - target: {fileID: 7485026274071775570, guid: d32846b5c6e5d6f4e853c2e07e103dc6,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 520009635, guid: d32846b5c6e5d6f4e853c2e07e103dc6, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -1,10 +1,11 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class GeneratedDialogue : MonoBehaviour
-{
+{/*
     [System.Serializable]
     public class Dialogue
     {
@@ -109,5 +110,5 @@ public class GeneratedDialogue : MonoBehaviour
         pitchVariance = profile.pitchVariance;
         speed = profile.speed;
         nameText.text = "- - " + profile.name + " - -";
-    }
+    }*/
 }
