@@ -1,9 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CheckAllBoxes : MonoBehaviour
 {
+    public Animator transitionAnim;
+
+
     public Box1Script box1;
     public Box2Script box2;
     public Box3Script box3;
@@ -26,7 +30,19 @@ public class CheckAllBoxes : MonoBehaviour
     {
         if (box1.activated && box2.activated && box3.activated && box4.activated && box5.activated && box6.activated && box7.activated && box8.activated && box9.activated)
         {
-            Debug.Log("Every box is activated, PUZZLE COMPLETE!");
+
+            GameObject.Find("IslandCompletionManager").GetComponent<IslandCompletionTracker>().LightPuzzleIslandCompleted = true;
+
+            //transitions back to the hubworld
+            StartCoroutine(LoadScene());
+            
         }
+    }
+
+    IEnumerator LoadScene()
+    {
+        transitionAnim.SetTrigger("end");
+        yield return new WaitForSeconds(1.5f);
+        UnityEngine.SceneManagement.SceneManager.LoadScene("RyanHubWorld");
     }
 }
