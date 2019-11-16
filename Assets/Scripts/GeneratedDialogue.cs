@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class GeneratedDialogue : MonoBehaviour
-{/*
+{
     [System.Serializable]
     public class Dialogue
     {
@@ -13,6 +13,12 @@ public class GeneratedDialogue : MonoBehaviour
         public string text;
         public SpeakerProfile speaker;
     }
+
+    public SpeakerProfile main;
+
+    public Animator animator;
+
+    private float startTime;
 
     [Header("Dialogue Stuff")]
     public Dialogue[] dialogues;
@@ -28,10 +34,18 @@ public class GeneratedDialogue : MonoBehaviour
     public AudioClip[] phonemes;
     private AudioSource aS;
 
-    void Start()
+    public void StartDialogue()
     {
+        startTime = Time.time;
         aS = GetComponent<AudioSource>();
         textbox.text = ""; // clear text
+        animator.SetBool("isOpen", true);
+        for (int x = 0; x < dialogues.Length; x++)
+        {
+            dialogues[x].speaker.DialStart.SetBool("isOpen", true);
+        }
+        NextDialogue();
+
     }
 
     void Update()
@@ -49,11 +63,32 @@ public class GeneratedDialogue : MonoBehaviour
             NextDialogue();
     }
 
-    void NextDialogue()
+    public void NextDialogue()
     {
         charIndex = -1;
         dialogueIndex++;
-        SwitchSpeaker();
+        if (dialogueIndex >= dialogues.Length)
+        {
+            animator.SetBool("isOpen", false);
+            enabled = false;
+            for (int x = 0; x < dialogues.Length; x++)
+                dialogues[x].speaker.DialStart.SetBool("isOpen", false);
+        }
+        else
+        {
+            for (int x = 0; x < dialogues.Length; x++)
+            {
+                if (dialogues[x].speaker == dialogues[dialogueIndex].speaker)
+                {
+                    dialogues[x].speaker.SpeakerSprite.color = new Color(1f, 1f, 1f, Mathf.SmoothStep(0.0f, 1f, Time.time - startTime / 5.0f));
+                }
+                else
+                {
+                    dialogues[x].speaker.SpeakerSprite.color = new Color(0.5f, 0.5f, 0.5f, Mathf.SmoothStep(0.0f, 1f, Time.time - startTime / 5.0f));
+                }
+            }
+            SwitchSpeaker();
+        }
     }
 
     void AddCharacter()
@@ -110,5 +145,5 @@ public class GeneratedDialogue : MonoBehaviour
         pitchVariance = profile.pitchVariance;
         speed = profile.speed;
         nameText.text = "- - " + profile.name + " - -";
-    }*/
+    }
 }
