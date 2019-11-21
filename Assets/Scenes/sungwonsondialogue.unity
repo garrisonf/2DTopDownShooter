@@ -1280,6 +1280,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   main: {fileID: 1107892676}
   animator: {fileID: 983359559}
+  dialogueFinished: 0
   dialogues:
   - text: hey
     speaker: {fileID: 1107892676}
@@ -1290,6 +1291,8 @@ MonoBehaviour:
   - text: my name is angelito
     speaker: {fileID: 908737756}
   - text: hye
+    speaker: {fileID: 1107892676}
+  - text: bye!
     speaker: {fileID: 1107892676}
   charDelay: 0.01
   textbox: {fileID: 2034571789}

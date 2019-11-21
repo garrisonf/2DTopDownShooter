@@ -20,6 +20,8 @@ public class GeneratedDialogue : MonoBehaviour
 
     private float startTime;
 
+    public bool dialogueFinished;
+
     [Header("Dialogue Stuff")]
     public Dialogue[] dialogues;
     public float charDelay;
@@ -36,6 +38,7 @@ public class GeneratedDialogue : MonoBehaviour
 
     public void StartDialogue()
     {
+        dialogueFinished = false;
         startTime = Time.time;
         aS = GetComponent<AudioSource>();
         textbox.text = ""; // clear text
@@ -69,6 +72,7 @@ public class GeneratedDialogue : MonoBehaviour
         dialogueIndex++;
         if (dialogueIndex >= dialogues.Length)
         {
+            dialogueFinished = true;
             animator.SetBool("isOpen", false);
             enabled = false;
             for (int x = 0; x < dialogues.Length; x++)
@@ -80,11 +84,11 @@ public class GeneratedDialogue : MonoBehaviour
             {
                 if (dialogues[x].speaker == dialogues[dialogueIndex].speaker)
                 {
-                    dialogues[x].speaker.SpeakerSprite.color = new Color(1f, 1f, 1f, Mathf.SmoothStep(0.0f, 1f, Time.time - startTime / 5.0f));
+                    dialogues[x].speaker.SpeakerSprite.color = new Color(1f, 1f, 1f);
                 }
                 else
                 {
-                    dialogues[x].speaker.SpeakerSprite.color = new Color(0.5f, 0.5f, 0.5f, Mathf.SmoothStep(0.0f, 1f, Time.time - startTime / 5.0f));
+                    dialogues[x].speaker.SpeakerSprite.color = new Color(0.5f, 0.5f, 0.5f);
                 }
             }
             SwitchSpeaker();
