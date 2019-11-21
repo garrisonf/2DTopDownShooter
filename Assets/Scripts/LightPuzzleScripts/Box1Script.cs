@@ -18,7 +18,14 @@ public class Box1Script : MonoBehaviour
         // If the box collider is overlapping with the player's collider
         if (GetComponent<Collider2D>().IsTouching(GameObject.FindWithTag("Player").GetComponent<Collider2D>()))
         {
-            activated = !activated;
+            // If the user presses space
+            if (Input.GetKeyDown("space"))
+            {
+                // Flip all the switches
+                affectedBoxes[0].GetComponent<Box1Script>().activated = !affectedBoxes[0].GetComponent<Box1Script>().activated;
+                affectedBoxes[1].GetComponent<Box2Script>().activated = !affectedBoxes[1].GetComponent<Box2Script>().activated;
+                affectedBoxes[2].GetComponent<Box4Script>().activated = !affectedBoxes[2].GetComponent<Box4Script>().activated;
+            }
         }
 
         if (activated)
