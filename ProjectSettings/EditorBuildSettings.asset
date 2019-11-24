@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/YouWin.unity
     guid: 106802399a6614d44b4ad9c366eef201
+  - enabled: 1
+    path: Assets/Scenes/JPScene.unity
+    guid: cc3c76d49de643e46bc539d12ec10f98
   m_configObjects: {}

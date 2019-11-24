@@ -48,12 +48,12 @@ public class AfterIslandCompletedScript : MonoBehaviour
             island2.GetComponent<CircleCollider2D>().enabled = false;
 
             //make the player spawn where the laser puzzle island is
-            GameObject.Find("PlayerShip").transform.position = GameObject.Find("LasertPuzzleIsland").transform.position;
+            GameObject.Find("PlayerShip").transform.position = GameObject.Find("Island2").transform.position;
         }
 
 
         // if all islands in the game are completed, remove the clouds, let player leave
-        if (GameObject.Find("IslandCompletionManager").GetComponent<IslandCompletionTracker>().LightPuzzleIslandCompleted)
+        if (GameObject.Find("IslandCompletionManager").GetComponent<IslandCompletionTracker>().LightPuzzleIslandCompleted && GameObject.Find("IslandCompletionManager").GetComponent<IslandCompletionTracker>().LaserPuzzleIslandCompleted)
         {
             GameObject.Find("Clouds1").SetActive(false);
             GameObject.Find("CloudBoundaryContainer").GetComponent<EdgeCollider2D>().enabled = false;

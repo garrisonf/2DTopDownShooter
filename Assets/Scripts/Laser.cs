@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Laser : MonoBehaviour
 {
+    public Animator transitionAnim;
+
     RaycastHit2D hit;
     LineRenderer lineRend;
     bool laserAllowed = true;
@@ -43,12 +45,14 @@ public class Laser : MonoBehaviour
              hit.collider.gameObject.GetComponent<SpriteRenderer>().color = new Color(Random.value, Random.value, Random.value);
               
              Debug.Log("Laser Puzzle Completed");
-             //GameObject.Find("IslandCompletionManager").GetComponent<IslandCompletionTracker>().LaserPuzzleIslandCompleted = true;
-             //StartCoroutine(waitForLaser());
-            
-          }
-          
-          if(hit.collider != null && hit.transform.tag == "Boundary")
+             GameObject.Find("IslandCompletionManager").GetComponent<IslandCompletionTracker>().LaserPuzzleIslandCompleted = true;
+             StartCoroutine(LoadScene());
+
+                //StartCoroutine(waitForLaser());
+
+            }
+
+            if (hit.collider != null && hit.transform.tag == "Boundary")
           {
              Debug.Log(lineRend.positionCount);
              laserStarted = false;
@@ -142,5 +146,12 @@ public class Laser : MonoBehaviour
        laserStartingDirection = lineRend.GetPosition(lineRend.positionCount - 1) - lineRend.GetPosition(lineRend.positionCount - 2);
        ray = new Ray2D(lineRend.GetPosition(lineRend.positionCount - 2), laserStartingDirection);
        GameObject.FindWithTag("Receiver").GetComponent<SpriteRenderer>().color = receiverColor;
+    }
+
+    IEnumerator LoadScene()
+    {
+        transitionAnim.SetTrigger("end");
+        yield return new WaitForSeconds(1.5f);
+        UnityEngine.SceneManagement.SceneManager.LoadScene("RyanHubWorld");
     }
 }

@@ -33,6 +33,16 @@ public class HubWorldSceneManager : MonoBehaviour
                 StartCoroutine(LoadLightPuzzleScene());
             }
         }
+
+        if (GetComponent<Collider2D>().IsTouching(GameObject.FindWithTag("LaserPuzzleIsland").GetComponent<Collider2D>()))
+        {
+            // If the user presses space while over Light Puzzle Island
+            if (Input.GetKeyDown("space"))
+            {
+                
+                StartCoroutine(LoadLaserPuzzleScene());
+            }
+        }
     }
 
     // if player exits the cloud boundary after all islands are complete
@@ -49,6 +59,13 @@ public class HubWorldSceneManager : MonoBehaviour
         transitionAnim.SetTrigger("end");
         yield return new WaitForSeconds(1.5f);
         UnityEngine.SceneManagement.SceneManager.LoadScene("RyanLightPuzzle");
+    }
+
+    IEnumerator LoadLaserPuzzleScene()
+    {
+        transitionAnim.SetTrigger("end");
+        yield return new WaitForSeconds(1.5f);
+        UnityEngine.SceneManagement.SceneManager.LoadScene("JPScene");
     }
 
     IEnumerator LoadYouWinScene()

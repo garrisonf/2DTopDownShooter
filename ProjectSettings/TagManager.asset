@@ -10,6 +10,7 @@ TagManager:
   - Receiver
   - CloudBoundary
   - Boundary
+  - LaserPuzzleIsland
   layers:
   - Default
   - TransparentFX

@@ -1286,6 +1286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7960666e59455fa4ebff48e42a66be51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  transitionAnim: {fileID: 1033164491}
 --- !u!120 &1237321352
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -1750,7 +1751,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 8.978743
+  orthographic size: 6.5381207
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
