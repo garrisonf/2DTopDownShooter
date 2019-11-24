@@ -37,6 +37,7 @@ public class CheckAllBoxes : MonoBehaviour
             StartCoroutine(LoadScene());
             
         }
+
     }
 
     IEnumerator LoadScene()

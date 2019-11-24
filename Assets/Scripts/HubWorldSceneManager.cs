@@ -19,21 +19,46 @@ public class HubWorldSceneManager : MonoBehaviour
     {
         if (GetComponent<Collider2D>().IsTouching(GameObject.FindWithTag("LightPuzzleIsland").GetComponent<Collider2D>()))
         {
-            // If the user presses space
+            // If the user presses space while over Light Puzzle Island
             if (Input.GetKeyDown("space"))
             {
-                // go to light puzzle scene
-                StartCoroutine(LoadScene());
+                /*//trigger dialogue
+                FindObjectOfType<GeneratedDialogue>().StartDialogue();
+                if (GameObject.Find("DialogueManager").GetComponent<GeneratedDialogue>().dialogueFinished)
+                {
+                    // if dialogue is over change scene
+                    
+                }
+                */
+                StartCoroutine(LoadLightPuzzleScene());
             }
         }
     }
 
-    IEnumerator LoadScene()
+    // if player exits the cloud boundary after all islands are complete
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.name == "CloudBoundaryContainer")
+        {
+            StartCoroutine(LoadYouWinScene());
+        }
+    }
+
+    IEnumerator LoadLightPuzzleScene()
     {
         transitionAnim.SetTrigger("end");
         yield return new WaitForSeconds(1.5f);
         UnityEngine.SceneManagement.SceneManager.LoadScene("RyanLightPuzzle");
     }
+
+    IEnumerator LoadYouWinScene()
+    {
+        transitionAnim.SetTrigger("end");
+        yield return new WaitForSeconds(1.5f);
+        UnityEngine.SceneManagement.SceneManager.LoadScene("YouWin");
+    }
+
+    
 
 
 }

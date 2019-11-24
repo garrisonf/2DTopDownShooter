@@ -35,7 +35,7 @@ public class PlayerDashMechanic : MonoBehaviour
     void Update()
     {
         Vector2 forwardDash = m_MainCamera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-        if (Input.GetKeyDown(KeyCode.LeftShift) && dashCoolDown >= 1f)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && dashCoolDown >= 0.5f)
         {
             dashTime = 0.1f;
             dashCoolDown = 0;

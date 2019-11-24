@@ -5,9 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class IslandCompletionTracker : MonoBehaviour
 {
- 
+    public bool startedNewGame = false;
+
     // booleans that keep track of what islands have been completed
     public bool LightPuzzleIslandCompleted = false;
+    public bool LaserPuzzleIslandCompleted = false;
 
     // the code in Awake() makes sure that the PuzzleIslandManager gameobject is not duplicated every time there is a scene transition
     void Awake()

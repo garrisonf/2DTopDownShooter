@@ -24,23 +24,20 @@ public class ResetPuzzle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GetComponent<Collider2D>().IsTouching(GameObject.FindWithTag("Player").GetComponent<Collider2D>()))
+        // If the user presses space
+        if (Input.GetKeyDown("r"))
         {
-            // If the user presses space
-            if (Input.GetKeyDown("space"))
-            {
-                Debug.Log("Reset Puzzle!");
-                box1.activated = false;
-                box2.activated = false;
-                box3.activated = false;
-                box4.activated = false;
-                box5.activated = false;
-                box6.activated = false;
-                box7.activated = false;
-                box8.activated = false;
-                box9.activated = false;
+            Debug.Log("Reset Puzzle!");
+            box1.activated = false;
+            box2.activated = false;
+            box3.activated = false;
+            box4.activated = false;
+            box5.activated = false;
+            box6.activated = false;
+            box7.activated = false;
+            box8.activated = false;
+            box9.activated = false;
 
-            }
         }
     }
 }
