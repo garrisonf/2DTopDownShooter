@@ -7,94 +7,112 @@ public class Laser : MonoBehaviour
     RaycastHit2D hit;
     LineRenderer lineRend;
     bool laserAllowed = true;
-    Vector2 laserHit;
+    bool laserStarted = false;
+    Vector2 laserStartingDirection;
+    Ray2D ray;
+    Color receiverColor;
     
-    // Start is called before the first frame update
+    //Start is called before the first frame update
     void Start()
     {   
         lineRend = GetComponent<LineRenderer>();
         lineRend.enabled = false;
-        laserHit = transform.position;
+        laserStartingDirection = lineRend.GetPosition(lineRend.positionCount - 1) - lineRend.GetPosition(lineRend.positionCount - 2);
+        ray = new Ray2D(lineRend.GetPosition(lineRend.positionCount - 2), laserStartingDirection);
+        receiverColor = GameObject.FindWithTag("Receiver").GetComponent<SpriteRenderer>().color;
     }
 
     // Update is called once per frame
     void Update()
     {
-       if(laserAllowed)
+       if(Input.GetKeyDown("r"))
        {
-          //Ray2D ray = new Ray2D(lineRend.GetPosition(lineRend.positionCount - 2), lineRend.GetPosition(lineRend.positionCount - 1));
-          //RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, detection, collisionMask);
-          hit = Physics2D.Linecast(laserHit, lineRend.GetPosition(lineRend.positionCount - 1));
-          //if(Physics.Raycast(ray, out hitPoint, Mathf.Infinity)
+          Debug.Log("Laser Destroyed");
+          destroyLaser();
+       }
+       
+       if(laserAllowed && laserStarted)
+       {
+          RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
+          
+          if(hit.collider != null && hit.transform.tag == "Receiver")
+          {
+             laserStarted = false;
+             lineRend.positionCount++;
+             lineRend.SetPosition(lineRend.positionCount - 1, hit.point);
+             hit.collider.gameObject.GetComponent<SpriteRenderer>().color = new Color(Random.value, Random.value, Random.value);
+              
+             Debug.Log("Laser Puzzle Completed");
+             //GameObject.Find("IslandCompletionManager").GetComponent<IslandCompletionTracker>().LaserPuzzleIslandCompleted = true;
+             //StartCoroutine(waitForLaser());
+            
+          }
+          
+          if(hit.collider != null && hit.transform.tag == "Boundary")
+          {
+             Debug.Log(lineRend.positionCount);
+             laserStarted = false;
+             lineRend.positionCount++;
+             Debug.Log(lineRend.positionCount); 
+             lineRend.SetPosition(lineRend.positionCount - 1, hit.point);
+             
+             StartCoroutine(waitForLaser());
+          }
+          
           if(hit.collider != null && hit.transform.tag == "Reflector")
           {
+             //to ignore raycast start in collider
+             //Go to Edit -> Project Settings -> Physics2D -> Uncheck box "Queries Start in Colliders"
+             //no need for hit.transform.gameObject.layer = 2;
+             
              StartCoroutine(waitForLaser());
              
-             laserHit = hit.point;
-             Vector2 normalOfReflector = hit.normal;
+             Transform refTransform = hit.collider.transform;
+             Debug.Log(hit.collider.name);
              
-             Transform reflectorHit = hit.transform;
+             Vector2 normalRef;
+             //testCode alternative for hit.normal (normal of reflector)
+             switch((int) refTransform.eulerAngles.z)
+             {
+               case 315:
+               case -45:
+                  normalRef = new Vector2(1, 1);
+                  break;
+               case -315:
+               case 45:
+                  normalRef = new Vector2(-1, 1);
+                  break;
+               case -225:
+               case 135:
+                  normalRef = new Vector2(1, 1);
+                  break;
+               case 225:
+               case -135:
+                  normalRef = new Vector2(-1, 1);
+                  break;
+               default:
+                  Debug.LogError("Euler Angle: " +  (int) refTransform.eulerAngles.z);
+                  normalRef = new Vector2(1, 1);
+                  break;
+             }
+             
+              Vector2 reflectedVector = Vector2.Reflect(ray.direction, normalRef.normalized);
+             
+             //Vector2 normalOfReflector = hit.normal;
+             //Vector2 reflectedVector = Vector2.Reflect(ray.direction, normalOfReflector.normalized);
              
              (lineRend.positionCount)++;
              
-             Vector3 p1 = lineRend.GetPosition(lineRend.positionCount - 3);
-             Vector3 p2 = lineRend.GetPosition(lineRend.positionCount - 2);
+             //lineRend.SetPosition(lineRend.positionCount - 1, hit.point);
+             lineRend.SetPosition(lineRend.positionCount - 1, refTransform.position);
              
-             float xComponent = Mathf.Round(p2.x - p1.x);
-             float yComponent = Mathf.Round(p2.y - p1.y);
              
-             //bottom left to top right diagonal
-             if(reflectorHit.eulerAngles.z == 45.0f || reflectorHit.eulerAngles.z == -135.0f)
-             {
-                //laser moving right
-                if(xComponent > 0.0f && yComponent == 0.0f)
-                {
-                   lineRend.SetPosition(lineRend.positionCount - 1, new Vector3(p2.x, p2.y + 3.0f, 0));
-                }
-                //laser moving left
-                else if(xComponent < 0.0f && yComponent == 0.0f)
-                {
-                   lineRend.SetPosition(lineRend.positionCount - 1, new Vector3(p2.x, p2.y - 3.0f, 0));
-                }
-                //laser moving up
-                else if(xComponent == 0.0f && yComponent > 0.0f)
-                {
-                   lineRend.SetPosition(lineRend.positionCount - 1, new Vector3(p2.x + 3.0f, p2.y, 0));
-                }
-                //laser moving down
-                else if(xComponent == 0.0f && yComponent < 0.0f)
-                {
-                   lineRend.SetPosition(lineRend.positionCount - 1, new Vector3(p2.x - 3.0f, p2.y, 0));
-                }
-             }
-             //top left to bottom right diagonal
-             if(reflectorHit.eulerAngles.z == -45.0f || reflectorHit.eulerAngles.z == 135.0f)
-             {
-                //laser moving right
-                if(xComponent > 0.0f && yComponent == 0.0f)
-                {
-                   lineRend.SetPosition(lineRend.positionCount - 1, new Vector3(p2.x, p2.y - 3.0f, 0));
-                }
-                //laser moving left
-                else if(xComponent < 0.0f && yComponent == 0.0f)
-                {
-                   lineRend.SetPosition(lineRend.positionCount - 1, new Vector3(p2.x, p2.y + 3.0f, 0));
-                }
-                //laser moving up
-                else if(xComponent == 0.0f && yComponent > 0.0f)
-                {
-                   lineRend.SetPosition(lineRend.positionCount - 1, new Vector3(p2.x - 3.0f, p2.y, 0));
-                }
-                //laser moving down
-                else if(xComponent == 0.0f && yComponent < 0.0f)
-                {
-                   lineRend.SetPosition(lineRend.positionCount - 1, new Vector3(p2.x + 3.0f, p2.y, 0));
-                }
-             }
+             
+             //ray.origin = lineRend.GetPosition(lineRend.positionCount - 1);
+             //ray.direction = reflectedVector;
+             ray = new Ray2D(lineRend.GetPosition(lineRend.positionCount - 1), reflectedVector); 
           }
-          
        }
-        
     }
     
     public void OnCollisionStay2D(Collision2D other)
@@ -103,10 +121,8 @@ public class Laser : MonoBehaviour
        {
           if(Input.GetKeyDown("space"))
           {
-             //lineRend.SetPosition(0, new Vector3(transform.position.x, transform.position.y, 0));
-             //lineRend.SetPosition(1, new Vector3(r1.transform.position.x, r1.transform.position.y, 0);
+             laserStarted = true;
              lineRend.enabled = true;
-             //StartCoroutine(waitForLaser());
           }
        }
     }
@@ -116,5 +132,15 @@ public class Laser : MonoBehaviour
        laserAllowed = false;
        yield return new WaitForSeconds(0.5f);
        laserAllowed = true;
+    }
+    
+    public void destroyLaser()
+    {
+       lineRend.positionCount = 2;
+       laserStarted = false;
+       lineRend.enabled = false;
+       laserStartingDirection = lineRend.GetPosition(lineRend.positionCount - 1) - lineRend.GetPosition(lineRend.positionCount - 2);
+       ray = new Ray2D(lineRend.GetPosition(lineRend.positionCount - 2), laserStartingDirection);
+       GameObject.FindWithTag("Receiver").GetComponent<SpriteRenderer>().color = receiverColor;
     }
 }

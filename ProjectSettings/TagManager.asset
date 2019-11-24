@@ -9,6 +9,7 @@ TagManager:
   - Reflector
   - Receiver
   - CloudBoundary
+  - Boundary
   layers:
   - Default
   - TransparentFX
