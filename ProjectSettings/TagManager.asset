@@ -8,6 +8,7 @@ TagManager:
   - LightPuzzleIsland
   - Reflector
   - Receiver
+  - Boundary
   layers:
   - Default
   - TransparentFX

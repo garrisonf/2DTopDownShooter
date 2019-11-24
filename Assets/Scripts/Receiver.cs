@@ -21,4 +21,9 @@ public class Receiver : MonoBehaviour
            //sr.color = new Color(Random.value, Random.value, Random.value);
         }
     }
+    
+    public void randomColors()
+    {
+       sr.color = new Color(Random.value, Random.value, Random.value);
+    }
 }
