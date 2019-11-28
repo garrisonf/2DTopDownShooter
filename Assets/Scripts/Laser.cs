@@ -14,6 +14,10 @@ public class Laser : MonoBehaviour
     Ray2D ray;
     Color receiverColor;
     
+    //for this gameObject color (Laser)
+    SpriteRenderer sr;
+    Color originalColor;
+    
     //Start is called before the first frame update
     void Start()
     {   
@@ -22,6 +26,10 @@ public class Laser : MonoBehaviour
         laserStartingDirection = lineRend.GetPosition(lineRend.positionCount - 1) - lineRend.GetPosition(lineRend.positionCount - 2);
         ray = new Ray2D(lineRend.GetPosition(lineRend.positionCount - 2), laserStartingDirection);
         receiverColor = GameObject.FindWithTag("Receiver").GetComponent<SpriteRenderer>().color;
+        
+        //for this gameObject color (Laser)
+        sr = GetComponent<SpriteRenderer>();
+        originalColor = sr.color;
     }
 
     // Update is called once per frame
@@ -61,6 +69,7 @@ public class Laser : MonoBehaviour
              lineRend.SetPosition(lineRend.positionCount - 1, hit.point);
              
              StartCoroutine(waitForLaser());
+             StartCoroutine(destroyAtBoundary());
           }
           
           if(hit.collider != null && hit.transform.tag == "Reflector")
@@ -119,6 +128,11 @@ public class Laser : MonoBehaviour
        }
     }
     
+    public void OnCollisionEnter2D(Collision2D other)
+    {
+       sr.color = Color.green;
+    }
+    
     public void OnCollisionStay2D(Collision2D other)
     {
        if(GetComponent<Collider2D>().IsTouching(GameObject.FindWithTag("Player").GetComponent<Collider2D>()))
@@ -131,11 +145,22 @@ public class Laser : MonoBehaviour
        }
     }
     
+    public void OnCollisionExit2D(Collision2D other)
+    {
+       sr.color = originalColor;
+    }
+    
     IEnumerator waitForLaser()
     {
        laserAllowed = false;
        yield return new WaitForSeconds(0.5f);
        laserAllowed = true;
+    }
+    
+    IEnumerator destroyAtBoundary()
+    {
+       yield return new WaitForSeconds(0.5f);
+       destroyLaser();
     }
     
     public void destroyLaser()
