@@ -10,6 +10,7 @@ public class IslandCompletionTracker : MonoBehaviour
     // booleans that keep track of what islands have been completed
     public bool LightPuzzleIslandCompleted = false;
     public bool LaserPuzzleIslandCompleted = false;
+    public bool island3PuzzleIslandCompleted = false;
 
     // the code in Awake() makes sure that the PuzzleIslandManager gameobject is not duplicated every time there is a scene transition
     void Awake()
