@@ -2109,7 +2109,6 @@ GameObject:
   - component: {fileID: 1958120549}
   - component: {fileID: 1958120548}
   - component: {fileID: 1958120547}
-  - component: {fileID: 1958120546}
   - component: {fileID: 1958120545}
   m_Layer: 0
   m_Name: PlayerShip
@@ -2222,22 +2221,6 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
---- !u!114 &1958120546
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1958120544}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1fe92f65fefd7424c9e0cbdbeed9986d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movementScript: {fileID: 1958120550}
-  dashTime: 0
-  speedModifier: 1
-  dashCoolDown: 0
 --- !u!58 &1958120547
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2283,8 +2266,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 2.5
-  m_AngularDrag: 5
+  m_LinearDrag: 0.5
+  m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
@@ -2303,7 +2286,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d4297d2256c6bf4b9ffe68adff5a964, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
+  moveSpeed: 7
+  maxSpeed: 10
+  opposingForceMultiplier: 3
 --- !u!4 &1958120551
 Transform:
   m_ObjectHideFlags: 0
