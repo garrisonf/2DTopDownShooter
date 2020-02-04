@@ -1,15 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class LightPuzzle : MonoBehaviour
 {
   public int width;
   public int height;
+  private static BoxTile[] boxes;
+  public static Collider2D player_collider;
+  public static readonly Color activated_color = new Color(0f, 250f, 0f);
+  public static readonly Color deactivated_color = new Color(0f, 0f, 0f);
+  public static readonly string activation_key = "space";
+  public static readonly string reset_key = "r";
   
-  void Awake()
+  void Start()
   {
+    boxes = new BoxTile[width * height];
     Transform box_group = this.gameObject.transform.Find("Boxes");
+    
+    UnityEngine.Assertions.Assert.AreEqual(width * height, box_group.childCount,
+      "LightPuzzle: width*height does not match number of boxes" +
+      " (width=" + width + " height=" + height + " boxes=" + box_group.childCount + ")");
+    
+    player_collider = GameObject.FindWithTag("Player").GetComponent<Collider2D>();
     
     for (int i = 0; i < box_group.childCount; ++i)
     {
@@ -27,7 +41,21 @@ public class LightPuzzle : MonoBehaviour
       if (col < width-1) // add right
         neighbors[j++] = box_group.GetChild(i+1).GetComponent<BoxTile>();
       
-      box_group.GetChild(i).GetComponent<BoxTile>().setNeighbors(neighbors);
+      boxes[i] = box_group.GetChild(i).GetComponent<BoxTile>();
+      boxes[i].setNeighbors(neighbors);
     }
+  }
+  
+  void Update()
+  {
+    if (boxes.All(x => x.activated)) // to do
+    {
+      print("COMPLETE");
+      Destroy(this);
+    }
+    
+    if (Input.GetKeyDown(reset_key))
+      foreach (BoxTile box in boxes)
+        box.activated = false;
   }
 }
