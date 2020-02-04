@@ -6,26 +6,28 @@ public class LightPuzzle : MonoBehaviour
 {
   public int width;
   public int height;
-  public BoxTile[,] boxes;
   
-  void Start()
+  void Awake()
   {
-    boxes = new BoxTile[height, width];
     Transform box_group = this.gameObject.transform.Find("Boxes");
     
     for (int i = 0; i < box_group.childCount; ++i)
-      print(box_group.GetChild(i).GetComponent<BoxTile>().box_name);
-
-    box_group.GetChild(8).GetComponent<BoxTile>().box_name = "LOOOOOOOL";
-    
-    box_group = this.gameObject.transform.Find("Boxes");
-    for (int i = 0; i < box_group.childCount; ++i)
-      print(box_group.GetChild(i).GetComponent<BoxTile>().box_name);
-    
-    
-        //boxes = GetComponentsInChildren<BoxTile>();
-
-        //foreach (BoxTile b in boxes)
-            //print(b.box_name);
+    {
+      BoxTile[] neighbors = new BoxTile[4]{null, null, null, null};
+      int j = 0;
+      int row = i / height;
+      int col = i - row * width;
+      
+      if (row > 0)        // add up
+        neighbors[j++] = box_group.GetChild(i-width).GetComponent<BoxTile>();
+      if (row < height-1) // add down
+        neighbors[j++] = box_group.GetChild(i+width).GetComponent<BoxTile>();
+      if (col > 0)        // add left
+        neighbors[j++] = box_group.GetChild(i-1).GetComponent<BoxTile>();
+      if (col < width-1) // add right
+        neighbors[j++] = box_group.GetChild(i+1).GetComponent<BoxTile>();
+      
+      box_group.GetChild(i).GetComponent<BoxTile>().setNeighbors(neighbors);
+    }
   }
 }
