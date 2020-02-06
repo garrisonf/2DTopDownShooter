@@ -8,10 +8,6 @@ public class LightPuzzle : MonoBehaviour
   public int width;
   public int height;
   private static BoxTile[] boxes;
-  public static Collider2D player_collider;
-  public static readonly Color activated_color = new Color(0f, 250f, 0f);
-  public static readonly Color deactivated_color = new Color(0f, 0f, 0f);
-  public static readonly string activation_key = "space";
   public static readonly string reset_key = "r";
   
   void Start()
@@ -23,7 +19,7 @@ public class LightPuzzle : MonoBehaviour
       "LightPuzzle: width*height does not match number of boxes" +
       " (width=" + width + " height=" + height + " boxes=" + box_group.childCount + ")");
     
-    player_collider = GameObject.FindWithTag("Player").GetComponent<Collider2D>();
+    BoxTile.player_collider = GameObject.FindWithTag("Player").GetComponent<Collider2D>();
     
     for (int i = 0; i < box_group.childCount; ++i)
     {
