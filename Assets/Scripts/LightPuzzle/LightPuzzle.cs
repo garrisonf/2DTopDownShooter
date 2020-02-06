@@ -7,11 +7,14 @@ public class LightPuzzle : MonoBehaviour
 {
   public int width;
   public int height;
-  private static BoxTile[] boxes;
-  public static readonly string reset_key = "r";
+  private BoxTile[] boxes;
+  private PuzzleManager light_puzzle_loader;
+  public readonly string reset_key = "r";
   
   void Start()
   {
+    light_puzzle_loader = GameObject.FindWithTag("LightPuzzleLoader").GetComponent<PuzzleManager>();
+    
     boxes = new BoxTile[width * height];
     Transform box_group = this.gameObject.transform.Find("Boxes");
     
@@ -46,12 +49,16 @@ public class LightPuzzle : MonoBehaviour
   {
     if (boxes.All(x => x.activated)) // to do
     {
-      print("COMPLETE");
+      light_puzzle_loader.enterIsland();
       Destroy(this);
     }
     
     if (Input.GetKeyDown(reset_key))
       foreach (BoxTile box in boxes)
         box.activated = false;
+    
+    if (Input.GetKeyDown("p"))
+      foreach (BoxTile box in boxes)
+        box.activated = true;
   }
 }

@@ -23,4 +23,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/JPScene.unity
     guid: cc3c76d49de643e46bc539d12ec10f98
+  - enabled: 1
+    path: Assets/Scenes/TestScene.unity
+    guid: 0b99c90e6a2e9191dbdb8662de5639d1
+  - enabled: 1
+    path: Assets/Scenes/LightPuzzle3x3.unity
+    guid: 55b3c59b6507a6b42b9cc3d75052e498
+  - enabled: 1
+    path: Assets/Scenes/LightPuzzle3x3copy.unity
+    guid: 4897e7ea186507ec4baf5fc673ac3c27
   m_configObjects: {}
