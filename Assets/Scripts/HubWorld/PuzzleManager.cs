@@ -1,40 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PuzzleManager : MonoBehaviour
 {
-  public string[] puzzle_scenes;
-  private int times = 0;
+  public PuzzleLoader light_puzzle_loader;
+  public string[] light_puzzle_scenes;
+  public bool light_puzzle_completed = false;
   
   void Awake()
   {
-    DontDestroyOnLoad(this.gameObject);
+    if (FindObjectsOfType<PuzzleManager>().Length != 1)
+      Destroy(gameObject);
+    else
+      DontDestroyOnLoad(gameObject);
   }
   
-  public void enterIsland()
-  {
-    print("in island " + times);
-    StartCoroutine(loadScene(times++));
-    
-    
+  void Start()
+  {    
+    light_puzzle_loader = gameObject.AddComponent<PuzzleLoader>();
+    light_puzzle_loader.setScenes(light_puzzle_scenes);
   }
   
-  IEnumerator loadScene(int scene)
+  public void loadLightPuzzle()
   {
-    //Scene current_scene = SceneManager.GetActiveScene();
-    //AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(puzzle_scenes[scene], LoadSceneMode.Additive);
-    //while (!asyncLoad.isDone)
-    //{
-      //yield return null;
-    //}
-    //SceneManager.MoveGameObjectToScene(this.gameObject, SceneManager.GetSceneByName(puzzle_scenes[scene]));
-    //SceneManager.UnloadSceneAsync(current_scene);
-    
-    
-    //transitionAnim.SetTrigger("end");
-    yield return new WaitForSeconds(1.5f);
-    UnityEngine.SceneManagement.SceneManager.LoadScene(puzzle_scenes[scene]);
+    light_puzzle_loader.enterIsland();
   }
 }
