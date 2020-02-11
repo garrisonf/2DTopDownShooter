@@ -5,9 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class PuzzleLoader : MonoBehaviour
 {
-  private string[] puzzle_scenes;
+  private string[] puzzle_scenes = null;
   private int total_puzzles;
   private int current_puzzle;
+  public bool puzzles_completed;
   private readonly string hubworld_scene = "TestScene";
   
   public void setScenes(string[] puzzle_scenes_list)
@@ -17,22 +18,24 @@ public class PuzzleLoader : MonoBehaviour
   
   public void enterIsland()
   {
+    UnityEngine.Assertions.Assert.AreNotEqual(puzzle_scenes, null);
+    
     total_puzzles = puzzle_scenes.Length;
     current_puzzle = -1;
     loadNextPuzzle();
   }
   
-  public bool loadNextPuzzle()
+  public void loadNextPuzzle()
   {
     if (++current_puzzle < total_puzzles)
     {
       StartCoroutine(loadScene(puzzle_scenes[current_puzzle]));
-      return false;
+      puzzles_completed = false;
     }
     else
     {
       StartCoroutine(loadScene(hubworld_scene));
-      return true;
+      puzzles_completed = true;
     }
   }
   

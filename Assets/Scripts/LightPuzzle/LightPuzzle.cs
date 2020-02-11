@@ -14,14 +14,12 @@ public class LightPuzzle : MonoBehaviour
   
   void Start()
   {
-    puzzle_manager = GameObject.FindWithTag("PuzzleManager").GetComponent<PuzzleManager>();
+    puzzle_manager = GameObject.Find("PuzzleManager").GetComponent<PuzzleManager>();
     
     boxes = new BoxTile[width * height];
     Transform box_group = this.gameObject.transform.Find("Boxes");
     
-    UnityEngine.Assertions.Assert.AreEqual(width * height, box_group.childCount,
-      "LightPuzzle: width*height does not match number of boxes" +
-      " (width=" + width + " height=" + height + " boxes=" + box_group.childCount + ")");
+    UnityEngine.Assertions.Assert.AreEqual(width * height, box_group.childCount);
     
     for (int i = 0; i < box_group.childCount; ++i)
     {
@@ -51,7 +49,9 @@ public class LightPuzzle : MonoBehaviour
     if (!loading_scene && boxes.All(x => x.activated))
     {
       loading_scene = true;
-      puzzle_manager.light_puzzle_completed = puzzle_manager.light_puzzle_loader.loadNextPuzzle();
+      puzzle_manager.puzzle_loaders[IslandPuzzleType.LightPuzzleIsland].loadNextPuzzle();
+      if (puzzle_manager.puzzle_loaders[IslandPuzzleType.LightPuzzleIsland].puzzles_completed)
+        puzzle_manager.updateCurrentIsland();
     }
     
     if (!loading_scene && Input.GetKeyDown(reset_key))

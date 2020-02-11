@@ -4,9 +4,20 @@ using UnityEngine;
 
 public class PuzzleManager : MonoBehaviour
 {
-  public PuzzleLoader light_puzzle_loader;
   public string[] light_puzzle_scenes;
-  public bool light_puzzle_completed = false;
+  public Dictionary<IslandPuzzleType, PuzzleLoader> puzzle_loaders = new Dictionary<IslandPuzzleType, PuzzleLoader>();
+  private IslandPuzzleType[] islands_order;
+  private int current_island = 0;
+  
+  public int getCurrentIsland()
+  {
+    return current_island;
+  }
+  
+  public void updateCurrentIsland()
+  {
+    ++current_island;
+  }
   
   void Awake()
   {
@@ -17,13 +28,19 @@ public class PuzzleManager : MonoBehaviour
   }
   
   void Start()
-  {    
-    light_puzzle_loader = gameObject.AddComponent<PuzzleLoader>();
-    light_puzzle_loader.setScenes(light_puzzle_scenes);
+  {
+    islands_order = GameObject.Find("IslandManager").GetComponent<IslandManager>().islands_order;
+    
+    foreach (IslandPuzzleType island_puzzle_type in islands_order)
+      puzzle_loaders.Add(island_puzzle_type, gameObject.AddComponent<PuzzleLoader>());
+    
+    puzzle_loaders[IslandPuzzleType.LightPuzzleIsland].setScenes(light_puzzle_scenes);
   }
   
-  public void loadLightPuzzle()
+  public void loadPuzzle()
   {
-    light_puzzle_loader.enterIsland();
+    UnityEngine.Assertions.Assert.IsTrue(current_island < islands_order.Length);
+    
+    puzzle_loaders[islands_order[current_island]].enterIsland();
   }
 }

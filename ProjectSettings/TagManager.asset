@@ -12,7 +12,7 @@ TagManager:
   - Boundary
   - LaserPuzzleIsland
   - LightPuzzleLoader
-  - PuzzleManager
+  - IslandLock
   layers:
   - Default
   - TransparentFX
