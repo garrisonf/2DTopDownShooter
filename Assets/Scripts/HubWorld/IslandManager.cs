@@ -6,6 +6,7 @@ public class IslandManager : MonoBehaviour
 {
     private PuzzleManager puzzle_manager;
     private Collider2D player_collider;
+    private bool loading_scene = false;
     private Collider2D light_puzzle_island;
     private readonly string activation_key = "space";
     
@@ -18,8 +19,13 @@ public class IslandManager : MonoBehaviour
 
     void Update()
     {
-      if (!puzzle_manager.light_puzzle_completed && player_collider.IsTouching(light_puzzle_island))
+      if (!loading_scene && !puzzle_manager.light_puzzle_completed && player_collider.IsTouching(light_puzzle_island))
+      {
         if (Input.GetKeyDown(activation_key))
+        {
+          loading_scene = true;
           puzzle_manager.loadLightPuzzle();
+        }
+      }
     }
 }

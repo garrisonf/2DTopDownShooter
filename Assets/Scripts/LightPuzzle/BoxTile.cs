@@ -6,10 +6,15 @@ public class BoxTile : MonoBehaviour
 {
   public bool activated = false;
   private BoxTile[] neighbors = new BoxTile[4];
-  public static Collider2D player_collider;
+  private Collider2D player_collider;
   private readonly string activation_key = "space";
   private readonly Color activated_color = new Color(0f, 250f, 0f);
   private readonly Color deactivated_color = new Color(0f, 0f, 0f);
+  
+  void Start()
+  {
+    player_collider = GameObject.FindWithTag("Player").GetComponent<Collider2D>();
+  }
   
   public void setNeighbors(BoxTile[] neighbors_list)
   {
@@ -18,7 +23,7 @@ public class BoxTile : MonoBehaviour
   
   void Update()
   {
-    if (GetComponent<Collider2D>().IsTouching(player_collider))
+    if (!LightPuzzle.loading_scene && GetComponent<Collider2D>().IsTouching(player_collider))
     {
       if (Input.GetKeyDown(activation_key))
       {

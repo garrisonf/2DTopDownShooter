@@ -9,6 +9,7 @@ public class LightPuzzle : MonoBehaviour
   public int height;
   private BoxTile[] boxes;
   private PuzzleManager puzzle_manager;
+  public static bool loading_scene = false;
   public readonly string reset_key = "r";
   
   void Start()
@@ -21,8 +22,6 @@ public class LightPuzzle : MonoBehaviour
     UnityEngine.Assertions.Assert.AreEqual(width * height, box_group.childCount,
       "LightPuzzle: width*height does not match number of boxes" +
       " (width=" + width + " height=" + height + " boxes=" + box_group.childCount + ")");
-    
-    BoxTile.player_collider = GameObject.FindWithTag("Player").GetComponent<Collider2D>();
     
     for (int i = 0; i < box_group.childCount; ++i)
     {
@@ -43,21 +42,23 @@ public class LightPuzzle : MonoBehaviour
       boxes[i] = box_group.GetChild(i).GetComponent<BoxTile>();
       boxes[i].setNeighbors(neighbors);
     }
+    
+    loading_scene = false;
   }
   
   void Update()
   {
-    if (boxes.All(x => x.activated))
+    if (!loading_scene && boxes.All(x => x.activated))
     {
+      loading_scene = true;
       puzzle_manager.light_puzzle_completed = puzzle_manager.light_puzzle_loader.loadNextPuzzle();
-      Destroy(this);
     }
     
-    if (Input.GetKeyDown(reset_key))
+    if (!loading_scene && Input.GetKeyDown(reset_key))
       foreach (BoxTile box in boxes)
         box.activated = false;
     
-    if (Input.GetKeyDown("p")) // REMOVE THIS
+    if (!loading_scene && Input.GetKeyDown("p")) // REMOVE THIS
       foreach (BoxTile box in boxes)
         box.activated = true;
   }
