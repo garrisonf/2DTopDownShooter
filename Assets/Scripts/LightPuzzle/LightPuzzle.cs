@@ -15,8 +15,6 @@ public class LightPuzzle : MonoBehaviour
   
   void Start()
   {
-    puzzle_manager = GameObject.Find("PuzzleManager").GetComponent<PuzzleManager>();
-    
     boxes = new BoxTile[width * height];
     Transform box_group = this.gameObject.transform.Find("Boxes");
     
@@ -44,6 +42,7 @@ public class LightPuzzle : MonoBehaviour
     }
     
     loading_scene = false;
+    puzzle_manager = GameObject.Find("PuzzleManager").GetComponent<PuzzleManager>();
   }
   
   void Update()

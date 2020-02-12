@@ -11,8 +11,9 @@ TagManager:
   - CloudBoundary
   - Boundary
   - LaserPuzzleIsland
-  - LightPuzzleLoader
   - IslandLock
+  - WireRed
+  - WireGreen
   layers:
   - Default
   - TransparentFX

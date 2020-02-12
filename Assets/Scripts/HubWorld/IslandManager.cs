@@ -5,6 +5,7 @@ using UnityEngine;
 public class IslandManager : MonoBehaviour
 {
   public IslandPuzzleType[] islands_order;
+  public Animator transition_animation = null;
   private PuzzleManager puzzle_manager;
   private Collider2D player_collider;
   private bool loading_scene = false;
@@ -23,9 +24,38 @@ public class IslandManager : MonoBehaviour
     }
   }
   
+  private static void activateGreenWire(GameObject island)
+  {
+    foreach (Transform child in island.transform)
+    {
+      if (child.tag == "WireGreen")
+      {
+        child.gameObject.GetComponent<SpriteRenderer>().enabled = true;
+        break;
+      }
+    }
+  }
+  
+  private static void activateRedWire(GameObject island)
+  {
+    foreach (Transform child in island.transform)
+    {
+      if (child.tag == "WireRed")
+      {
+        child.gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
+        break;
+      }
+    }
+  }
+  
   void Start()
   {
     puzzle_manager = GameObject.Find("PuzzleManager").GetComponent<PuzzleManager>();
+    
+    UnityEngine.Assertions.Assert.AreNotEqual(transition_animation, null);
+    
+    puzzle_manager.setTransitionAnimation(transition_animation);
+    
     player_collider = GameObject.FindWithTag("Player").GetComponent<Collider2D>();
     
     islands = new GameObject[islands_order.Length];
@@ -38,14 +68,26 @@ public class IslandManager : MonoBehaviour
       UnityEngine.Assertions.Assert.AreNotEqual(islands[i], null);
       
       islands[i].GetComponent<CircleCollider2D>().enabled = false;
-      if (i <= current_island)
+      if (i < current_island)
+      {
         hideLock(islands[i]);
+        activateGreenWire(islands[i]);
+      }
       ++i;
     }
-    islands[current_island].GetComponent<CircleCollider2D>().enabled = true;
     
+    if (current_island < islands.Length)
+    {
+      hideLock(islands[current_island]);
+      activateRedWire(islands[current_island]);
+      islands[current_island].GetComponent<CircleCollider2D>().enabled = true;
+    }
+
     if (current_island > 0 && puzzle_manager.isReturningFromIsland())
+    {
+      activateGreenWire(islands[current_island-1]);
       GameObject.Find("PlayerShip").transform.position = islands[current_island-1].transform.position;
+    }
   }
 
   void Update()

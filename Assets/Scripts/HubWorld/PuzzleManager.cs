@@ -5,7 +5,8 @@ using UnityEngine;
 public class PuzzleManager : MonoBehaviour
 {
   public string[] light_puzzle_scenes;
-  public Animator transition_animation = null;
+  public string[] laser_puzzle_scenes;
+  private Animator transition_animation = null;
   public Dictionary<IslandPuzzleType, PuzzleLoader> puzzle_loaders = new Dictionary<IslandPuzzleType, PuzzleLoader>();
   private IslandPuzzleType[] islands_order;
   private int current_island = 0;
@@ -27,6 +28,11 @@ public class PuzzleManager : MonoBehaviour
     return returning_from_island;
   }
   
+  public void setTransitionAnimation(Animator trans_animation)
+  {
+    transition_animation = trans_animation;
+  }
+  
   void Awake()
   {
     if (FindObjectsOfType<PuzzleManager>().Length != 1)
@@ -43,8 +49,7 @@ public class PuzzleManager : MonoBehaviour
       puzzle_loaders.Add(island_puzzle_type, gameObject.AddComponent<PuzzleLoader>());
     
     puzzle_loaders[IslandPuzzleType.LightPuzzleIsland].setScenes(light_puzzle_scenes);
-    
-    UnityEngine.Assertions.Assert.AreNotEqual(transition_animation, null);
+    puzzle_loaders[IslandPuzzleType.LaserPuzzleIsland].setScenes(laser_puzzle_scenes);
   }
   
   public void loadPuzzle()

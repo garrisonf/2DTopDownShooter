@@ -467,7 +467,7 @@ GameObject:
   - component: {fileID: 284470720}
   m_Layer: 0
   m_Name: Wire1Red
-  m_TagString: Untagged
+  m_TagString: WireRed
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -482,10 +482,9 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: 0.34192312, w: 0.93972796}
   m_LocalPosition: {x: -1.612, y: -1.361, z: 0}
   m_LocalScale: {x: 2.520684, y: 0.3994049, z: 1}
-  m_Children:
-  - {fileID: 724839433}
+  m_Children: []
   m_Father: {fileID: 764994763}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 39.988003}
 --- !u!212 &284470720
 SpriteRenderer:
@@ -685,7 +684,7 @@ GameObject:
   - component: {fileID: 498876783}
   m_Layer: 0
   m_Name: Wire2Red
-  m_TagString: Untagged
+  m_TagString: WireRed
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -700,10 +699,9 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: 0.8248374, w: 0.56537}
   m_LocalPosition: {x: -0.6525783, y: 1.8360606, z: 0}
   m_LocalScale: {x: 2.5206838, y: 0.39940494, z: 1}
-  m_Children:
-  - {fileID: 1472268023}
+  m_Children: []
   m_Father: {fileID: 1040453299}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 111.144005}
 --- !u!212 &498876783
 SpriteRenderer:
@@ -1073,7 +1071,7 @@ GameObject:
   - component: {fileID: 724839434}
   m_Layer: 0
   m_Name: Wire1Green
-  m_TagString: Untagged
+  m_TagString: WireGreen
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1085,12 +1083,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 724839432}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: 0.3419231, w: 0.9397279}
+  m_LocalPosition: {x: -1.6120003, y: -1.3610001, z: 0}
+  m_LocalScale: {x: 2.5206847, y: 0.39940497, z: 1}
   m_Children: []
-  m_Father: {fileID: 284470719}
-  m_RootOrder: 0
+  m_Father: {fileID: 764994763}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &724839434
 SpriteRenderer:
@@ -1170,6 +1168,7 @@ Transform:
   m_LocalScale: {x: 5.8322005, y: 5.8322005, z: 5.8322005}
   m_Children:
   - {fileID: 1289875498}
+  - {fileID: 724839433}
   - {fileID: 284470719}
   m_Father: {fileID: 1689725450}
   m_RootOrder: 1
@@ -1411,7 +1410,7 @@ GameObject:
   - component: {fileID: 822824047}
   m_Layer: 0
   m_Name: Wire3Green
-  m_TagString: Untagged
+  m_TagString: WireGreen
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1608,6 +1607,7 @@ Transform:
   m_LocalScale: {x: 5.8322005, y: 5.8322005, z: 5.8322005}
   m_Children:
   - {fileID: 1375644838}
+  - {fileID: 1472268023}
   - {fileID: 498876782}
   m_Father: {fileID: 1689725450}
   m_RootOrder: 2
@@ -1785,6 +1785,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   islands_order: 0000000001000000
+  transition_animation: {fileID: 123666123}
 --- !u!4 &1354320010
 Transform:
   m_ObjectHideFlags: 0
@@ -1983,7 +1984,7 @@ GameObject:
   - component: {fileID: 1472268024}
   m_Layer: 0
   m_Name: Wire2Green
-  m_TagString: Untagged
+  m_TagString: WireGreen
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1995,12 +1996,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1472268022}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: 0.8248374, w: 0.56537}
+  m_LocalPosition: {x: -0.6525783, y: 1.8360606, z: 0}
+  m_LocalScale: {x: 2.520684, y: 0.399405, z: 1}
   m_Children: []
-  m_Father: {fileID: 498876782}
-  m_RootOrder: 0
+  m_Father: {fileID: 1040453299}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1472268024
 SpriteRenderer:
@@ -2062,7 +2063,7 @@ GameObject:
   - component: {fileID: 1482945207}
   m_Layer: 0
   m_Name: Wire3Red
-  m_TagString: Untagged
+  m_TagString: WireRed
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2399,4 +2400,6 @@ MonoBehaviour:
   light_puzzle_scenes:
   - LightPuzzle3x3
   - LightPuzzle3x3copy
-  transition_animation: {fileID: 123666123}
+  laser_puzzle_scenes:
+  - LightPuzzle3x3
+  - LightPuzzle3x3copy
