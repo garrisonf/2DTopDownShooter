@@ -16,32 +16,32 @@ public class PuzzleLoader : MonoBehaviour
     puzzle_scenes = puzzle_scenes_list;
   }
   
-  public void enterIsland()
+  public void enterIsland(Animator transition_animation)
   {
     UnityEngine.Assertions.Assert.AreNotEqual(puzzle_scenes, null);
     
     total_puzzles = puzzle_scenes.Length;
     current_puzzle = -1;
-    loadNextPuzzle();
+    loadNextPuzzle(transition_animation);
   }
   
-  public void loadNextPuzzle()
+  public void loadNextPuzzle(Animator transition_animation)
   {
     if (++current_puzzle < total_puzzles)
     {
-      StartCoroutine(loadScene(puzzle_scenes[current_puzzle]));
+      StartCoroutine(loadScene(puzzle_scenes[current_puzzle], transition_animation));
       puzzles_completed = false;
     }
     else
     {
-      StartCoroutine(loadScene(hubworld_scene));
+      StartCoroutine(loadScene(hubworld_scene, transition_animation));
       puzzles_completed = true;
     }
   }
   
-  IEnumerator loadScene(string scene)
+  IEnumerator loadScene(string scene, Animator transition_animation)
   {    
-    //transitionAnim.SetTrigger("end");
+    transition_animation.SetTrigger("end");
     yield return new WaitForSeconds(1.5f);
     UnityEngine.SceneManagement.SceneManager.LoadScene(scene);
   }

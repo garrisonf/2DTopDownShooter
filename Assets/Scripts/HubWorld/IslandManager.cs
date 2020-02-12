@@ -43,6 +43,9 @@ public class IslandManager : MonoBehaviour
       ++i;
     }
     islands[current_island].GetComponent<CircleCollider2D>().enabled = true;
+    
+    if (current_island > 0 && puzzle_manager.isReturningFromIsland())
+      GameObject.Find("PlayerShip").transform.position = islands[current_island-1].transform.position;
   }
 
   void Update()

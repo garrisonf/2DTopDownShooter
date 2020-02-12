@@ -1878,6 +1878,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 3
   height: 3
+  transition_animation: {fileID: 1535467151}
 --- !u!1 &1385620025
 GameObject:
   m_ObjectHideFlags: 0
@@ -1924,7 +1925,7 @@ GameObject:
   - component: {fileID: 1535467151}
   m_Layer: 5
   m_Name: BlackCircle
-  m_TagString: Untagged
+  m_TagString: Finish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

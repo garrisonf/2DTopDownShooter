@@ -1878,6 +1878,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 3
   height: 3
+  transition_animation: {fileID: 1535467151}
 --- !u!1 &1385620025
 GameObject:
   m_ObjectHideFlags: 0

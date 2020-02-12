@@ -10,6 +10,7 @@ public class LightPuzzle : MonoBehaviour
   private BoxTile[] boxes;
   private PuzzleManager puzzle_manager;
   public static bool loading_scene = false;
+  public Animator transition_animation = null;
   public readonly string reset_key = "r";
   
   void Start()
@@ -20,6 +21,7 @@ public class LightPuzzle : MonoBehaviour
     Transform box_group = this.gameObject.transform.Find("Boxes");
     
     UnityEngine.Assertions.Assert.AreEqual(width * height, box_group.childCount);
+    UnityEngine.Assertions.Assert.AreNotEqual(transition_animation, null);
     
     for (int i = 0; i < box_group.childCount; ++i)
     {
@@ -49,7 +51,7 @@ public class LightPuzzle : MonoBehaviour
     if (!loading_scene && boxes.All(x => x.activated))
     {
       loading_scene = true;
-      puzzle_manager.puzzle_loaders[IslandPuzzleType.LightPuzzleIsland].loadNextPuzzle();
+      puzzle_manager.puzzle_loaders[IslandPuzzleType.LightPuzzleIsland].loadNextPuzzle(transition_animation);
       if (puzzle_manager.puzzle_loaders[IslandPuzzleType.LightPuzzleIsland].puzzles_completed)
         puzzle_manager.updateCurrentIsland();
     }
