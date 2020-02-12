@@ -46,7 +46,10 @@ public class PuzzleManager : MonoBehaviour
     islands_order = GameObject.Find("IslandManager").GetComponent<IslandManager>().islands_order;
     
     foreach (IslandPuzzleType island_puzzle_type in islands_order)
+    {
       puzzle_loaders.Add(island_puzzle_type, gameObject.AddComponent<PuzzleLoader>());
+      puzzle_loaders[island_puzzle_type].init(this);
+    }
     
     puzzle_loaders[IslandPuzzleType.LightPuzzleIsland].setScenes(light_puzzle_scenes);
     puzzle_loaders[IslandPuzzleType.LaserPuzzleIsland].setScenes(laser_puzzle_scenes);

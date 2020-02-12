@@ -8,7 +8,7 @@ public class LightPuzzle : MonoBehaviour
   public int width;
   public int height;
   private BoxTile[] boxes;
-  private PuzzleManager puzzle_manager;
+  private PuzzleLoader puzzle_loader;
   public static bool loading_scene = false;
   public Animator transition_animation = null;
   public readonly string reset_key = "r";
@@ -42,7 +42,7 @@ public class LightPuzzle : MonoBehaviour
     }
     
     loading_scene = false;
-    puzzle_manager = GameObject.Find("PuzzleManager").GetComponent<PuzzleManager>();
+    puzzle_loader = GameObject.Find("PuzzleManager").GetComponent<PuzzleManager>().puzzle_loaders[IslandPuzzleType.LightPuzzleIsland];
   }
   
   void Update()
@@ -50,9 +50,7 @@ public class LightPuzzle : MonoBehaviour
     if (!loading_scene && boxes.All(x => x.activated))
     {
       loading_scene = true;
-      puzzle_manager.puzzle_loaders[IslandPuzzleType.LightPuzzleIsland].loadNextPuzzle(transition_animation);
-      if (puzzle_manager.puzzle_loaders[IslandPuzzleType.LightPuzzleIsland].puzzles_completed)
-        puzzle_manager.updateCurrentIsland();
+      puzzle_loader.loadNextPuzzle(transition_animation);
     }
     
     if (!loading_scene && Input.GetKeyDown(reset_key))

@@ -8,8 +8,14 @@ public class PuzzleLoader : MonoBehaviour
   private string[] puzzle_scenes = null;
   private int total_puzzles;
   private int current_puzzle;
-  public bool puzzles_completed;
+  private bool puzzles_completed;
+  private PuzzleManager puzzle_manager;
   private readonly string hubworld_scene = "TestScene";
+  
+  public void init(PuzzleManager puzzle_manager_creator)
+  {
+    puzzle_manager = puzzle_manager_creator;
+  }
   
   public void setScenes(string[] puzzle_scenes_list)
   {
@@ -30,12 +36,11 @@ public class PuzzleLoader : MonoBehaviour
     if (++current_puzzle < total_puzzles)
     {
       StartCoroutine(loadScene(puzzle_scenes[current_puzzle], transition_animation));
-      puzzles_completed = false;
     }
     else
     {
+      puzzle_manager.updateCurrentIsland();
       StartCoroutine(loadScene(hubworld_scene, transition_animation));
-      puzzles_completed = true;
     }
   }
   
