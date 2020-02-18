@@ -7,15 +7,13 @@ public class MainMenu : MonoBehaviour
 {
     public void NewGame()
     {
-
-        GameObject.Find("IslandCompletionManager").GetComponent<IslandCompletionTracker>().startedNewGame = true;
-        UnityEngine.SceneManagement.SceneManager.LoadScene("RyanHubWorld");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("HubWorld");
     }
 
     public void ContinueGame()
     {
-
-        UnityEngine.SceneManagement.SceneManager.LoadScene("RyanHubWorld");
+        // load save here
+        UnityEngine.SceneManagement.SceneManager.LoadScene("HubWorld");
     }
 
     public void QuitGame()

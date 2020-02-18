@@ -6,6 +6,6 @@ public class ReturnToMenu : MonoBehaviour
 {
     public void GoToMenu()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenuScene");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
     }
 }

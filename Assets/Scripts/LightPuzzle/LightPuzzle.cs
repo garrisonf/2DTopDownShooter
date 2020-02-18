@@ -7,11 +7,11 @@ public class LightPuzzle : MonoBehaviour
 {
   public int width;
   public int height;
-  private BoxTile[] boxes;
-  private PuzzleLoader puzzle_loader;
-  public static bool loading_scene = false;
   public Animator transition_animation = null;
-  public readonly string reset_key = "r";
+  public static bool loading_scene;
+  BoxTile[] boxes;
+  PuzzleLoader puzzle_loader;
+  readonly string reset_key = "r";
   
   void Start()
   {

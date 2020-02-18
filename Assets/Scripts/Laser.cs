@@ -13,6 +13,8 @@ public class Laser : MonoBehaviour
     Vector2 laserStartingDirection;
     Ray2D ray;
     Color receiverColor;
+    bool loading_scene = false;
+    PuzzleLoader puzzle_loader;
     
     //for this gameObject color (Laser)
     SpriteRenderer sr;
@@ -30,12 +32,15 @@ public class Laser : MonoBehaviour
         //for this gameObject color (Laser)
         sr = GetComponent<SpriteRenderer>();
         originalColor = sr.color;
+        
+        loading_scene = false;
+        puzzle_loader = GameObject.Find("PuzzleManager").GetComponent<PuzzleManager>().puzzle_loaders[IslandPuzzleType.LaserPuzzleIsland];
     }
 
     // Update is called once per frame
     void Update()
     {
-       if(Input.GetKeyDown("r"))
+       if(!loading_scene && Input.GetKeyDown("r"))
        {
           Debug.Log("Laser Destroyed");
           destroyLaser();
@@ -45,16 +50,19 @@ public class Laser : MonoBehaviour
        {
           RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
           
-          if(hit.collider != null && hit.transform.tag == "Receiver")
+          if(!loading_scene && hit.collider != null && hit.transform.tag == "Receiver")
           {
              laserStarted = false;
              lineRend.positionCount++;
              lineRend.SetPosition(lineRend.positionCount - 1, hit.point);
              hit.collider.gameObject.GetComponent<SpriteRenderer>().color = new Color(Random.value, Random.value, Random.value);
+             
+             loading_scene = true;
+             puzzle_loader.loadNextPuzzle(transitionAnim);
               
-             Debug.Log("Laser Puzzle Completed");
-             GameObject.Find("IslandCompletionManager").GetComponent<IslandCompletionTracker>().LaserPuzzleIslandCompleted = true;
-             StartCoroutine(LoadScene());
+             //Debug.Log("Laser Puzzle Completed");
+             //GameObject.Find("IslandCompletionManager").GetComponent<IslandCompletionTracker>().LaserPuzzleIslandCompleted = true;
+             //StartCoroutine(LoadScene());
 
                 //StartCoroutine(waitForLaser());
 
@@ -173,10 +181,10 @@ public class Laser : MonoBehaviour
        GameObject.FindWithTag("Receiver").GetComponent<SpriteRenderer>().color = receiverColor;
     }
 
-    IEnumerator LoadScene()
-    {
-        transitionAnim.SetTrigger("end");
-        yield return new WaitForSeconds(1.5f);
-        UnityEngine.SceneManagement.SceneManager.LoadScene("RyanHubWorld");
-    }
+    //IEnumerator LoadScene()
+    //{
+        //transitionAnim.SetTrigger("end");
+        //yield return new WaitForSeconds(1.5f);
+        //UnityEngine.SceneManagement.SceneManager.LoadScene("RyanHubWorld");
+    //}
 }

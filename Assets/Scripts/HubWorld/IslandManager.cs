@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class IslandManager : MonoBehaviour
 {
-  public IslandPuzzleType[] islands_order;
   public Animator transition_animation = null;
-  private PuzzleManager puzzle_manager;
-  private Collider2D player_collider;
-  private bool loading_scene = false;
-  private GameObject[] islands;
-  private readonly string activation_key = "space";
+  PuzzleManager puzzle_manager;
+  IslandPuzzleType[] islands_order;
+  Collider2D player_collider;
+  bool loading_scene = false;
+  GameObject[] islands;
+  GameObject cloud_boundary = null;
+  readonly string activation_key = "space";
   
-  private static void hideLock(GameObject island)
+  static void hideLock(GameObject island)
   {
     foreach (Transform child in island.transform)
     {
@@ -24,7 +25,7 @@ public class IslandManager : MonoBehaviour
     }
   }
   
-  private static void activateGreenWire(GameObject island)
+  static void activateGreenWire(GameObject island)
   {
     foreach (Transform child in island.transform)
     {
@@ -36,7 +37,7 @@ public class IslandManager : MonoBehaviour
     }
   }
   
-  private static void activateRedWire(GameObject island)
+  static void activateRedWire(GameObject island)
   {
     foreach (Transform child in island.transform)
     {
@@ -51,12 +52,10 @@ public class IslandManager : MonoBehaviour
   void Start()
   {
     puzzle_manager = GameObject.Find("PuzzleManager").GetComponent<PuzzleManager>();
-    
-    UnityEngine.Assertions.Assert.AreNotEqual(transition_animation, null);
-    
-    puzzle_manager.setTransitionAnimation(transition_animation);
-    
+    islands_order = puzzle_manager.islands_order;
     player_collider = GameObject.FindWithTag("Player").GetComponent<Collider2D>();
+    UnityEngine.Assertions.Assert.AreNotEqual(transition_animation, null);
+    puzzle_manager.setTransitionAnimation(transition_animation);
     
     islands = new GameObject[islands_order.Length];
     int i = 0;
@@ -64,9 +63,7 @@ public class IslandManager : MonoBehaviour
     foreach (IslandPuzzleType island_puzzle_type in islands_order)
     {
       islands[i] = GameObject.FindWithTag(island_puzzle_type.ToString());
-      
       UnityEngine.Assertions.Assert.AreNotEqual(islands[i], null);
-      
       islands[i].GetComponent<CircleCollider2D>().enabled = false;
       if (i < current_island)
       {
@@ -87,6 +84,15 @@ public class IslandManager : MonoBehaviour
     {
       activateGreenWire(islands[current_island-1]);
       GameObject.Find("PlayerShip").transform.position = islands[current_island-1].transform.position;
+    }
+    
+    if (current_island >= islands.Length)
+    {
+      GameObject.Find("Clouds1").SetActive(false);
+      cloud_boundary = GameObject.FindWithTag("CloudBoundary");
+      cloud_boundary.GetComponent<EdgeCollider2D>().enabled = false;
+      cloud_boundary.GetComponent<CircleCollider2D>().enabled = true;
+      loading_scene = true;
     }
   }
 

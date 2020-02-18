@@ -5,12 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class PuzzleLoader : MonoBehaviour
 {
-  private string[] puzzle_scenes = null;
-  private int total_puzzles;
-  private int current_puzzle;
-  private bool puzzles_completed;
-  private PuzzleManager puzzle_manager;
-  private readonly string hubworld_scene = "TestScene";
+  string[] puzzle_scenes = null;
+  int total_puzzles;
+  int current_puzzle;
+  bool puzzles_completed;
+  PuzzleManager puzzle_manager;
+  Animator transition_animation;
+  readonly string hubworld_scene = "HubWorld";
   
   public void init(PuzzleManager puzzle_manager_creator)
   {
@@ -22,29 +23,35 @@ public class PuzzleLoader : MonoBehaviour
     puzzle_scenes = puzzle_scenes_list;
   }
   
-  public void enterIsland(Animator transition_animation)
+  public void enterIsland(Animator trans_animation)
   {
     UnityEngine.Assertions.Assert.AreNotEqual(puzzle_scenes, null);
-    
+    transition_animation = trans_animation;
     total_puzzles = puzzle_scenes.Length;
     current_puzzle = -1;
-    loadNextPuzzle(transition_animation);
+    loadNextPuzzle();
   }
   
-  public void loadNextPuzzle(Animator transition_animation)
+  public void loadNextPuzzle(Animator trans_animation)
+  {
+    transition_animation = trans_animation;
+    loadNextPuzzle();
+  }
+  
+  public void loadNextPuzzle()
   {
     if (++current_puzzle < total_puzzles)
     {
-      StartCoroutine(loadScene(puzzle_scenes[current_puzzle], transition_animation));
+      StartCoroutine(loadScene(puzzle_scenes[current_puzzle]));
     }
     else
     {
       puzzle_manager.updateCurrentIsland();
-      StartCoroutine(loadScene(hubworld_scene, transition_animation));
+      StartCoroutine(loadScene(hubworld_scene));
     }
   }
   
-  IEnumerator loadScene(string scene, Animator transition_animation)
+  IEnumerator loadScene(string scene)
   {    
     transition_animation.SetTrigger("end");
     yield return new WaitForSeconds(1.5f);

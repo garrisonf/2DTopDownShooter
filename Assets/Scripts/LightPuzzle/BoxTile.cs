@@ -5,11 +5,11 @@ using UnityEngine;
 public class BoxTile : MonoBehaviour
 {
   public bool activated = false;
-  private BoxTile[] neighbors = new BoxTile[4];
-  private Collider2D player_collider;
-  private readonly string activation_key = "space";
-  private readonly Color activated_color = new Color(0f, 250f, 0f);
-  private readonly Color deactivated_color = new Color(0f, 0f, 0f);
+  BoxTile[] neighbors = new BoxTile[4];
+  Collider2D player_collider;
+  readonly string activation_key = "space";
+  readonly Color activated_color = new Color(0f, 250f, 0f);
+  readonly Color deactivated_color = new Color(0f, 0f, 0f);
   
   void Start()
   {
