@@ -18,6 +18,8 @@ public class Save
 
 public class SaveDataManager
 {
+   static readonly string filename = "horizonSaveData";
+   
    //save and load functions
    public static void save(Vector3 vec, int numLevels)
    {
@@ -26,7 +28,7 @@ public class SaveDataManager
       savObject.numLevelsCompleted = numLevels;
       string jsonStr = JsonUtility.ToJson(savObject);
       
-      string path = Path.Combine(Application.persistentDataPath, "saveData");
+      string path = Path.Combine(Application.persistentDataPath, filename);
       
       using (StreamWriter streamWriter = File.CreateText(path))
       {
@@ -34,9 +36,16 @@ public class SaveDataManager
       }
    }
    
+   public static bool saveExists()
+   {
+      string path = Path.Combine(Application.persistentDataPath, filename);
+      FileInfo save_file = new FileInfo(path);
+      return save_file.Exists;
+   }
+   
    public static Save load()
    {
-      string path = Path.Combine(Application.persistentDataPath, "saveData");
+      string path = Path.Combine(Application.persistentDataPath, filename);
       
       using (StreamReader streamReader = File.OpenText(path))
       {

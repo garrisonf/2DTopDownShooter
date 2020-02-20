@@ -7,6 +7,7 @@ public class MainMenu : MonoBehaviour
 {
     public void NewGame()
     {
+        GameObject.Find("PuzzleManager").GetComponent<PuzzleManager>().newGame();
         UnityEngine.SceneManagement.SceneManager.LoadScene("HubWorld");
     }
 

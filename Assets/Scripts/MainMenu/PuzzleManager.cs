@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PuzzleManager : MonoBehaviour
 {
@@ -55,6 +56,11 @@ public class PuzzleManager : MonoBehaviour
     continue_game = true;
   }
   
+  public void newGame()
+  {
+    current_island = 0;
+  }
+  
   public Vector3? savedPlayerPosition()
   {
     if (continue_game)
@@ -82,6 +88,9 @@ public class PuzzleManager : MonoBehaviour
   
   void Start()
   {
+    if (!SaveDataManager.saveExists())
+      GameObject.Find("Continue").GetComponent<Button>().interactable = false;
+
     foreach (IslandPuzzleType island_puzzle_type in islands_order)
     {
       puzzle_loaders.Add(island_puzzle_type, gameObject.AddComponent<PuzzleLoader>());
