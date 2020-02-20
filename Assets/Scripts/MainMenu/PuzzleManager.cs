@@ -11,6 +11,8 @@ public class PuzzleManager : MonoBehaviour
   Animator transition_animation;
   int current_island;
   bool returning_from_island;
+  Save save_data = null;
+  bool continue_game = false;
   
   public PuzzleManager()
   {
@@ -39,6 +41,28 @@ public class PuzzleManager : MonoBehaviour
   public int getCurrentIsland()
   {
     return current_island;
+  }
+  
+  public void saveGame(Vector3 player_position)
+  {
+    SaveDataManager.save(player_position, current_island);
+  }
+  
+  public void loadSaveData()
+  {
+    save_data = SaveDataManager.load();
+    current_island = save_data.numLevelsCompleted;
+    continue_game = true;
+  }
+  
+  public Vector3 savedPlayerPosition()
+  {
+    if (continue_game)
+    {
+      continue_game = false;
+      return save_data.playerPosition;
+    }
+    return null;
   }
   
   public void loadPuzzle()

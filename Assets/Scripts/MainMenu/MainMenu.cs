@@ -12,7 +12,7 @@ public class MainMenu : MonoBehaviour
 
     public void ContinueGame()
     {
-        // load save here
+        GameObject.Find("PuzzleManager").GetComponent<PuzzleManager>().loadSaveData();
         UnityEngine.SceneManagement.SceneManager.LoadScene("HubWorld");
     }
 

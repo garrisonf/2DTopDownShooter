@@ -49,6 +49,13 @@ public class IslandManager : MonoBehaviour
     }
   }
   
+  void setPlayerPosition()
+  {
+    Vector3 player_position = puzzle_manager.savedPlayerPosition();
+    if (player_position != null)
+      GameObject.Find("PlayerShip").transform.position = player_position;
+  }
+  
   void Start()
   {
     puzzle_manager = GameObject.Find("PuzzleManager").GetComponent<PuzzleManager>();
@@ -56,6 +63,8 @@ public class IslandManager : MonoBehaviour
     player_collider = GameObject.FindWithTag("Player").GetComponent<Collider2D>();
     UnityEngine.Assertions.Assert.AreNotEqual(transition_animation, null);
     puzzle_manager.setTransitionAnimation(transition_animation);
+    
+    setPlayerPosition();
     
     islands = new GameObject[islands_order.Length];
     int i = 0;
@@ -83,7 +92,9 @@ public class IslandManager : MonoBehaviour
     if (current_island > 0 && puzzle_manager.isReturningFromIsland())
     {
       activateGreenWire(islands[current_island-1]);
-      GameObject.Find("PlayerShip").transform.position = islands[current_island-1].transform.position;
+      Vector3 new_position = islands[current_island-1].transform.position;
+      GameObject.Find("PlayerShip").transform.position = new_position;
+      puzzle_manager.saveGame(new_position);
     }
     
     if (current_island >= islands.Length)
