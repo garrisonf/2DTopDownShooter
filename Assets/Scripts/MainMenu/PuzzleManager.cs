@@ -55,7 +55,7 @@ public class PuzzleManager : MonoBehaviour
     continue_game = true;
   }
   
-  public Vector3 savedPlayerPosition()
+  public Vector3? savedPlayerPosition()
   {
     if (continue_game)
     {

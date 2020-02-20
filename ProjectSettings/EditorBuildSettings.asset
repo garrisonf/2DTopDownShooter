@@ -8,7 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: d16d381387b7d0abbb9a5a122badcb82
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/HubWorld for Sin.unity
     guid: f8df6c41d6a46f01fb6e3acc5ffecf99
   - enabled: 1

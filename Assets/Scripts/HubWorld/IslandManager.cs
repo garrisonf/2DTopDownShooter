@@ -51,9 +51,9 @@ public class IslandManager : MonoBehaviour
   
   void setPlayerPosition()
   {
-    Vector3 player_position = puzzle_manager.savedPlayerPosition();
+    Vector3? player_position = puzzle_manager.savedPlayerPosition();
     if (player_position != null)
-      GameObject.Find("PlayerShip").transform.position = player_position;
+      GameObject.Find("PlayerShip").transform.position = player_position.Value;
   }
   
   void Start()
