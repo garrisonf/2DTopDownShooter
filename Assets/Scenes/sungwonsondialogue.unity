@@ -1097,7 +1097,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DialStart: {fileID: 1782325571}
-  SpeakerSprite: {fileID: 0}
+  SpeakerSprite: {fileID: 1107892675}
   pitch: 2
   pitchVariance: 0
   speed: 1.046
@@ -1285,7 +1285,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DialStart: {fileID: 1945384738}
-  SpeakerSprite: {fileID: 0}
+  SpeakerSprite: {fileID: 908737754}
   pitch: 1
   pitchVariance: 0.5
   speed: 1.09
@@ -1470,17 +1470,17 @@ MonoBehaviour:
   dialogueFinished: 0
   dialogues:
   - text: hey
-    speaker: {fileID: 0}
+    speaker: {fileID: 1782325572}
   - text: wwhats up
-    speaker: {fileID: 0}
+    speaker: {fileID: 1945384739}
   - text: the namse joe
-    speaker: {fileID: 0}
+    speaker: {fileID: 1782325572}
   - text: my name is angelito
-    speaker: {fileID: 0}
+    speaker: {fileID: 1945384739}
   - text: hye
-    speaker: {fileID: 0}
+    speaker: {fileID: 1782325572}
   - text: bye!
-    speaker: {fileID: 0}
+    speaker: {fileID: 1945384739}
   charDelay: 0.01
   textbox: {fileID: 2034571789}
   nameText: {fileID: 1792210732}
