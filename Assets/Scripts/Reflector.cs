@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Reflector2 : MonoBehaviour
+public class Reflector : MonoBehaviour
 {
     public Rigidbody2D rb;
     public int currentAngle = -45;
@@ -37,7 +37,7 @@ public class Reflector2 : MonoBehaviour
             {
                 //prevent buffered/spammed rotations while rotating for 1 second
                 rotationAllowed = false;
-                Debug.Log("Rotating Reflector 2");
+                Debug.Log("Rotating Reflector 1");
                 //Set angularVelocity to 90 (rotating CCW)
                 rb.angularVelocity = 90;
                 StartCoroutine(waitForRotation());
