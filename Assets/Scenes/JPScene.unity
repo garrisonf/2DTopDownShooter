@@ -2179,6 +2179,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotateSpeed: 500
+  x: 0
+  y: 0
+  z: 1
 --- !u!212 &1801153536
 SpriteRenderer:
   m_ObjectHideFlags: 0

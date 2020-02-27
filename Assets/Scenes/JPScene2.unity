@@ -262,6 +262,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   incrementAmount: 0.02
+  inputAllowed: 0
 --- !u!61 &366883953
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -395,6 +396,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotateSpeed: 500
+  x: 0
+  y: 0
+  z: 1
 --- !u!212 &740461770
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -489,6 +493,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   incrementAmount: 0.1
+  inputAllowed: 0
 --- !u!61 &775962666
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -863,6 +868,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   incrementAmount: 0.2
+  inputAllowed: 0
 --- !u!212 &1476881428
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1608,6 +1614,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
+  maxSpeed: 30
+  opposingForceMultiplier: 2
 --- !u!4 &2049016041
 Transform:
   m_ObjectHideFlags: 0
