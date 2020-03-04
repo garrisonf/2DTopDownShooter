@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Reflector7 : MonoBehaviour
+public class Wall : MonoBehaviour
 {
     public Rigidbody2D rb;
     public int currentAngle = -45;
@@ -24,7 +24,7 @@ public class Reflector7 : MonoBehaviour
         
     public void OnCollisionEnter2D(Collision2D other)
     {
-       sr.color = Color.green;
+       //sr.color = Color.green;
     }
     
     public void OnCollisionStay2D(Collision2D other)
@@ -37,7 +37,7 @@ public class Reflector7 : MonoBehaviour
             {
                 //prevent buffered/spammed rotations while rotating for 1 second
                 rotationAllowed = false;
-                Debug.Log("Rotating Reflector 7");
+                Debug.Log("Rotating Reflector 1");
                 //Set angularVelocity to 90 (rotating CCW)
                 rb.angularVelocity = 90;
                 StartCoroutine(waitForRotation());
