@@ -1545,7 +1545,7 @@ MonoBehaviour:
   - LightPuzzle4x4Medium
   - LightPuzzle5x5Hard
   laserPuzzleScenes:
-  - JPScene
+  - LaserPuzzleEasy
 --- !u!4 &961240935
 Transform:
   m_ObjectHideFlags: 0

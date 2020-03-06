@@ -11,7 +11,7 @@ public class PuzzleLoader : MonoBehaviour
   bool puzzlesCompleted;
   PuzzleManager puzzleManager;
   Animator transitionAnimation;
-  readonly string hubworldScene = "HubWorld for Sin";
+  readonly string hubworldScene = "HubWorld";
   
   public void init(PuzzleManager puzzleManagerCreator)
   {

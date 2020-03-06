@@ -13,8 +13,8 @@ public class Laser : MonoBehaviour
     Vector2 laserStartingDirection;
     Ray2D ray;
     Color receiverColor;
-    bool loading_scene = false;
-    PuzzleLoader puzzle_loader;
+    bool loadingScene = false;
+    PuzzleLoader puzzleLoader;
     
     //for this gameObject color (Laser)
     SpriteRenderer sr;
@@ -33,14 +33,14 @@ public class Laser : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         originalColor = sr.color;
         
-        loading_scene = false;
-        puzzle_loader = GameObject.Find("PuzzleManager").GetComponent<PuzzleManager>().PuzzleLoaders[IslandPuzzleType.LaserPuzzleIsland];
+        loadingScene = false;
+        puzzleLoader = GameObject.Find("PuzzleManager").GetComponent<PuzzleManager>().PuzzleLoaders[IslandPuzzleType.LaserPuzzleIsland];
     }
 
     // Update is called once per frame
     void Update()
     {
-       if(!loading_scene && Input.GetKeyDown("r"))
+       if(!loadingScene && Input.GetKeyDown("r"))
        {
           Debug.Log("Laser Destroyed");
           destroyLaser();
@@ -50,15 +50,15 @@ public class Laser : MonoBehaviour
        {
           RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
           
-          if(!loading_scene && hit.collider != null && hit.transform.tag == "Receiver")
+          if(!loadingScene && hit.collider != null && hit.transform.CompareTag("Receiver"))
           {
              laserStarted = false;
              lineRend.positionCount++;
              lineRend.SetPosition(lineRend.positionCount - 1, hit.point);
              hit.collider.gameObject.GetComponent<SpriteRenderer>().color = new Color(Random.value, Random.value, Random.value);
              
-             loading_scene = true;
-             puzzle_loader.loadNextPuzzle(transitionAnim);
+             loadingScene = true;
+             puzzleLoader.loadNextPuzzle(transitionAnim);
               
              //Debug.Log("Laser Puzzle Completed");
              //GameObject.Find("IslandCompletionManager").GetComponent<IslandCompletionTracker>().LaserPuzzleIslandCompleted = true;
@@ -66,9 +66,9 @@ public class Laser : MonoBehaviour
 
                 //StartCoroutine(waitForLaser());
 
-            }
+          }
 
-            if (hit.collider != null && hit.transform.tag == "Boundary")
+          if (hit.collider != null && hit.transform.CompareTag("Boundary"))
           {
              Debug.Log(lineRend.positionCount);
              laserStarted = false;
@@ -80,7 +80,7 @@ public class Laser : MonoBehaviour
              StartCoroutine(destroyAtBoundary());
           }
           
-          if(hit.collider != null && hit.transform.tag == "Reflector")
+          if(hit.collider != null && hit.transform.CompareTag("Reflector"))
           {
              //to ignore raycast start in collider
              //Go to Edit -> Project Settings -> Physics2D -> Uncheck box "Queries Start in Colliders"
@@ -95,29 +95,29 @@ public class Laser : MonoBehaviour
              //testCode alternative for hit.normal (normal of reflector)
              switch((int) refTransform.eulerAngles.z)
              {
-               case 315:
-               case -45:
-                  normalRef = new Vector2(1, 1);
-                  break;
-               case -315:
-               case 45:
-                  normalRef = new Vector2(-1, 1);
-                  break;
-               case -225:
-               case 135:
-                  normalRef = new Vector2(1, 1);
-                  break;
-               case 225:
-               case -135:
-                  normalRef = new Vector2(-1, 1);
-                  break;
-               default:
-                  Debug.LogError("Euler Angle: " +  (int) refTransform.eulerAngles.z);
-                  normalRef = new Vector2(1, 1);
-                  break;
+                case 315:
+                case -45:
+                   normalRef = new Vector2(1, 1);
+                   break;
+                case -315:
+                case 45:
+                   normalRef = new Vector2(-1, 1);
+                   break;
+                case -225:
+                case 135:
+                   normalRef = new Vector2(1, 1);
+                   break;
+                case 225:
+                case -135:
+                   normalRef = new Vector2(-1, 1);
+                   break;
+                default:
+                   Debug.LogError("Euler Angle: " +  (int) refTransform.eulerAngles.z);
+                   normalRef = new Vector2(1, 1);
+                   break;
              }
              
-              Vector2 reflectedVector = Vector2.Reflect(ray.direction, normalRef.normalized);
+             Vector2 reflectedVector = Vector2.Reflect(ray.direction, normalRef.normalized);
              
              //Vector2 normalOfReflector = hit.normal;
              //Vector2 reflectedVector = Vector2.Reflect(ray.direction, normalOfReflector.normalized);

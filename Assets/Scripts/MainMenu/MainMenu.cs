@@ -8,13 +8,13 @@ public class MainMenu : MonoBehaviour
     public void NewGame()
     {
         GameObject.Find("PuzzleManager").GetComponent<PuzzleManager>().newGame();
-        UnityEngine.SceneManagement.SceneManager.LoadScene("HubWorld for Sin");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("HubWorld");
     }
 
     public void ContinueGame()
     {
         GameObject.Find("PuzzleManager").GetComponent<PuzzleManager>().loadSaveData();
-        UnityEngine.SceneManagement.SceneManager.LoadScene("HubWorld for SIn");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("HubWorld");
     }
 
     public void QuitGame()

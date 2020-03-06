@@ -9,21 +9,27 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: d16d381387b7d0abbb9a5a122badcb82
   - enabled: 1
-    path: Assets/Scenes/HubWorld for Sin.unity
+    path: Assets/Scenes/HubWorld.unity
     guid: f8df6c41d6a46f01fb6e3acc5ffecf99
-  - enabled: 1
-    path: Assets/Scenes/LightPuzzle/LightPuzzle3x3Easy.unity
-    guid: 55b3c59b6507a6b42b9cc3d75052e498
-  - enabled: 1
-    path: Assets/Scenes/LightPuzzle3x3copy.unity
-    guid: 4897e7ea186507ec4baf5fc673ac3c27
-  - enabled: 1
-    path: Assets/Scenes/JPScene.unity
-    guid: cc3c76d49de643e46bc539d12ec10f98
   - enabled: 1
     path: Assets/Scenes/YouWin.unity
     guid: 106802399a6614d44b4ad9c366eef201
   - enabled: 1
-    path: Assets/Scenes/HubWorld.unity
-    guid: bd330424c98cd7a49bfaf96399df7059
+    path: Assets/Scenes/LightPuzzle/LightPuzzle3x3Easy.unity
+    guid: 55b3c59b6507a6b42b9cc3d75052e498
+  - enabled: 1
+    path: Assets/Scenes/LightPuzzle/LightPuzzle4x4Medium.unity
+    guid: d0bde949e29a70242aaea70ae2d18f79
+  - enabled: 1
+    path: Assets/Scenes/LightPuzzle/LightPuzzle5x5Hard.unity
+    guid: 63b86a298fce6914fb3156114aa4a47a
+  - enabled: 1
+    path: Assets/Scenes/LazerPuzzle/LaserPuzzleEasy.unity
+    guid: cc3c76d49de643e46bc539d12ec10f98
+  - enabled: 1
+    path: Assets/Scenes/LazerPuzzle/LaserPuzzleMedium.unity
+    guid: 527d8b2a5301326448f3a70db4870215
+  - enabled: 1
+    path: Assets/Scenes/LazerPuzzle/LaserPuzzleHard.unity
+    guid: 390d4e647d9499f4591dd484c977bbd0
   m_configObjects: {}
