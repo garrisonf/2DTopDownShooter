@@ -1539,13 +1539,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75065ec47148634679e57fc26f9362e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  islandsOrder: 0000000001000000
+  islandsOrder: 000000000100000002000000
   lightPuzzleScenes:
   - LightPuzzle3x3Easy
   - LightPuzzle4x4Medium
   - LightPuzzle5x5Hard
   laserPuzzleScenes:
   - LaserPuzzleEasy
+  switchPuzzleScenes:
+  - SwitchPuzzleEasy
 --- !u!4 &961240935
 Transform:
   m_ObjectHideFlags: 0

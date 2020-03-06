@@ -8,25 +8,28 @@ public class Switch : MonoBehaviour
     //Start is called before the first frame update
     Color originalColor = Color.white;
     public float incrementAmount;
-    public bool inputAllowed;
+    bool inputAllowed;
+    VerticalBar verticalBar;
+    
     void Start()
     {
         GetComponent<SpriteRenderer>().color = originalColor;
         inputAllowed = true;
+        verticalBar = GameObject.FindWithTag("VerticalBar").GetComponent<VerticalBar>();
     }
 
     // Update is called once per frame
     void Update()
     {
         // If the box collider is overlapping with the player's collider
-        if(GetComponent<Collider2D>().IsTouching(GameObject.FindWithTag("Player").GetComponent<Collider2D>()))
+        if(inputAllowed && !verticalBar.loadingScene && GetComponent<Collider2D>().IsTouching(GameObject.FindWithTag("Player").GetComponent<Collider2D>()))
         {
             // If the user presses space
-            if(Input.GetKeyDown("space") && inputAllowed)
+            if(Input.GetKeyDown("space"))
             {
                StartCoroutine(waitForSwitch());
                //GameObject.FindWithTag("VerticalBar").GetComponent<Slider>().value += 0.2f;
-               GameObject.FindWithTag("VerticalBar").GetComponent<VerticalBar>().IncrementProgress(incrementAmount);
+               verticalBar.IncrementProgress(incrementAmount);
             }
         }
     }

@@ -9,6 +9,7 @@ public class PuzzleManager : MonoBehaviour
   public IslandPuzzleType[] islandsOrder;
   public string[] lightPuzzleScenes;
   public string[] laserPuzzleScenes;
+  public string[] switchPuzzleScenes;
   public Dictionary<IslandPuzzleType, PuzzleLoader> PuzzleLoaders { get; private set; }
   Animator transitionAnimation;
   int currentIsland;
@@ -100,5 +101,6 @@ public class PuzzleManager : MonoBehaviour
     
     PuzzleLoaders[IslandPuzzleType.LightPuzzleIsland].setScenes(lightPuzzleScenes);
     PuzzleLoaders[IslandPuzzleType.LaserPuzzleIsland].setScenes(laserPuzzleScenes);
+    PuzzleLoaders[IslandPuzzleType.SwitchPuzzleIsland].setScenes(switchPuzzleScenes);
   }
 }

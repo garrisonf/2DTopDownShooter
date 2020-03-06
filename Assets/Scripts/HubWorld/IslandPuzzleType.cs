@@ -1,5 +1,6 @@
 ﻿public enum IslandPuzzleType
 {
   LightPuzzleIsland,
-  LaserPuzzleIsland
+  LaserPuzzleIsland,
+  SwitchPuzzleIsland
 }

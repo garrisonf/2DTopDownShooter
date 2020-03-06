@@ -32,4 +32,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LazerPuzzle/LaserPuzzleHard.unity
     guid: 390d4e647d9499f4591dd484c977bbd0
+  - enabled: 1
+    path: Assets/Scenes/SwitchPuzzle/SwitchPuzzleEasy.unity
+    guid: 2aff596d754e40746bbbdbf5f0b24f4d
+  - enabled: 1
+    path: Assets/Scenes/SwitchPuzzle/SwitchPuzzleMedium.unity
+    guid: 080082d05fbfea8448130446561e58ff
+  - enabled: 1
+    path: Assets/Scenes/SwitchPuzzle/SwitchPuzzleHard.unity
+    guid: 16547b0c80f0fd84482fcc3fcd5a627b
   m_configObjects: {}

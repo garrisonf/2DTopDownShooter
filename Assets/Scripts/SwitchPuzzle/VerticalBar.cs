@@ -12,6 +12,10 @@ public class VerticalBar : MonoBehaviour
 {
    public float fillSpeed = 0.5f;
    public float expectedProgress = 0.0f;
+   
+   public Animator transitionAnim;
+   public bool loadingScene { get; private set; }
+   PuzzleLoader puzzleLoader;
    //public bool adjustProgress;
    
    private Slider slider;
@@ -47,39 +51,47 @@ public class VerticalBar : MonoBehaviour
        slider.value = 0;
        //IncrementProgress(0.75f);
        slider.gameObject.transform.Find("Fill Area").Find("Fill").GetComponent<Image>().color = Color.yellow;
+       
+       loadingScene = false;
+       puzzleLoader = GameObject.Find("PuzzleManager").GetComponent<PuzzleManager>().PuzzleLoaders[IslandPuzzleType.SwitchPuzzleIsland];
     }
 
     // Update is called once per frame
     void Update()
     {
-        //getCurrentFill();
-        if(slider.value < targetProgress)
-        {
-           slider.value += fillSpeed * Time.deltaTime;
-        }
+       if (!loadingScene)
+       {
+          //getCurrentFill();
+          if(slider.value < targetProgress)
+          {
+             slider.value += fillSpeed * Time.deltaTime;
+          }
         
-        //adjust progress if decimal is not exact
-        if(slider.value > targetProgress)
-        {
-           slider.value = expectedProgress;
-        }
+          //adjust progress if decimal is not exact
+          if(slider.value > targetProgress)
+          {
+             slider.value = expectedProgress;
+          }
         
-        if(slider.value > maxProgress && slider.value != expectedProgress)
-        {
-           StartCoroutine(waitForBar());
-        }
-        
-        if(slider.value < (maxProgress + 0.01f) && slider.value > (maxProgress - 0.01f) && slider.value == expectedProgress)
-        {
-           slider.gameObject.transform.Find("Fill Area").Find("Fill").GetComponent<Image>().color = Color.cyan;
-        }
-        
-        //If the user presses r
-        if(Input.GetKeyDown("r"))
-        {
-            Debug.Log("Reset Puzzle!");
-            resetProgress();
-        }
+          if(slider.value > maxProgress && slider.value != expectedProgress)
+          {
+             StartCoroutine(waitForBar());
+          }
+ 
+          //If the user presses r
+          if(Input.GetKeyDown("r"))
+          {
+             Debug.Log("Reset Puzzle!");
+             resetProgress();
+          }
+          
+          if(slider.value < (maxProgress + 0.01f) && slider.value > (maxProgress - 0.01f) && slider.value == expectedProgress)
+          {
+             slider.gameObject.transform.Find("Fill Area").Find("Fill").GetComponent<Image>().color = Color.cyan;
+             loadingScene = true;
+             puzzleLoader.loadNextPuzzle(transitionAnim);
+          }
+       }
     }
     
     public void IncrementProgress(float newProgress)
