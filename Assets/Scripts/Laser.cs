@@ -34,7 +34,7 @@ public class Laser : MonoBehaviour
         originalColor = sr.color;
         
         loading_scene = false;
-        puzzle_loader = GameObject.Find("PuzzleManager").GetComponent<PuzzleManager>().puzzle_loaders[IslandPuzzleType.LaserPuzzleIsland];
+        puzzle_loader = GameObject.Find("PuzzleManager").GetComponent<PuzzleManager>().PuzzleLoaders[IslandPuzzleType.LaserPuzzleIsland];
     }
 
     // Update is called once per frame

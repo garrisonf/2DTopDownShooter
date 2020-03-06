@@ -1,81 +1,82 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class PuzzleManager : MonoBehaviour
 {
-  public IslandPuzzleType[] islands_order;
-  public string[] light_puzzle_scenes;
-  public string[] laser_puzzle_scenes;
-  public Dictionary<IslandPuzzleType, PuzzleLoader> puzzle_loaders { get; private set; }
-  Animator transition_animation;
-  int current_island;
-  bool returning_from_island;
-  Save save_data = null;
-  bool continue_game = false;
+  public IslandPuzzleType[] islandsOrder;
+  public string[] lightPuzzleScenes;
+  public string[] laserPuzzleScenes;
+  public Dictionary<IslandPuzzleType, PuzzleLoader> PuzzleLoaders { get; private set; }
+  Animator transitionAnimation;
+  int currentIsland;
+  bool returningFromIsland;
+  Save saveData = null;
+  bool continueGame = false;
   
   public PuzzleManager()
   {
-    puzzle_loaders = new Dictionary<IslandPuzzleType, PuzzleLoader>();
-    transition_animation = null;
-    current_island = 0;
-    returning_from_island = false;
+    PuzzleLoaders = new Dictionary<IslandPuzzleType, PuzzleLoader>();
+    transitionAnimation = null;
+    currentIsland = 0;
+    returningFromIsland = false;
   }
   
   public void updateCurrentIsland()
   {
-    ++current_island;
-    returning_from_island = true;
+    ++currentIsland;
+    returningFromIsland = true;
   }
   
   public bool isReturningFromIsland()
   {
-    return returning_from_island;
+    return returningFromIsland;
   }
   
-  public void setTransitionAnimation(Animator trans_animation)
+  public void setTransitionAnimation(Animator transAnimation)
   {
-    transition_animation = trans_animation;
+    transitionAnimation = transAnimation;
   }
   
   public int getCurrentIsland()
   {
-    return current_island;
+    return currentIsland;
   }
   
-  public void saveGame(Vector3 player_position)
+  public void saveGame(Vector3 playerPosition)
   {
-    SaveDataManager.save(player_position, current_island);
+    SaveDataManager.save(playerPosition, currentIsland);
   }
   
   public void loadSaveData()
   {
-    save_data = SaveDataManager.load();
-    current_island = save_data.numLevelsCompleted;
-    continue_game = true;
+    saveData = SaveDataManager.load();
+    currentIsland = saveData.numLevelsCompleted;
+    continueGame = true;
   }
   
   public void newGame()
   {
-    current_island = 0;
+    currentIsland = 0;
   }
   
   public Vector3? savedPlayerPosition()
   {
-    if (continue_game)
+    if (continueGame)
     {
-      continue_game = false;
-      return save_data.playerPosition;
+      continueGame = false;
+      return saveData.playerPosition;
     }
     return null;
   }
   
   public void loadPuzzle()
   {
-    UnityEngine.Assertions.Assert.IsTrue(current_island < islands_order.Length);
-    returning_from_island = false;
-    puzzle_loaders[islands_order[current_island]].enterIsland(transition_animation);
+    UnityEngine.Assertions.Assert.IsTrue(currentIsland < islandsOrder.Length);
+    returningFromIsland = false;
+    PuzzleLoaders[islandsOrder[currentIsland]].enterIsland(transitionAnimation);
   }
   
   void Awake()
@@ -91,13 +92,13 @@ public class PuzzleManager : MonoBehaviour
     if (!SaveDataManager.saveExists())
       GameObject.Find("Continue").GetComponent<Button>().interactable = false;
 
-    foreach (IslandPuzzleType island_puzzle_type in islands_order)
+    foreach (IslandPuzzleType islandPuzzleType in islandsOrder)
     {
-      puzzle_loaders.Add(island_puzzle_type, gameObject.AddComponent<PuzzleLoader>());
-      puzzle_loaders[island_puzzle_type].init(this);
+      PuzzleLoaders.Add(islandPuzzleType, gameObject.AddComponent<PuzzleLoader>());
+      PuzzleLoaders[islandPuzzleType].init(this);
     }
     
-    puzzle_loaders[IslandPuzzleType.LightPuzzleIsland].setScenes(light_puzzle_scenes);
-    puzzle_loaders[IslandPuzzleType.LaserPuzzleIsland].setScenes(laser_puzzle_scenes);
+    PuzzleLoaders[IslandPuzzleType.LightPuzzleIsland].setScenes(lightPuzzleScenes);
+    PuzzleLoaders[IslandPuzzleType.LaserPuzzleIsland].setScenes(laserPuzzleScenes);
   }
 }

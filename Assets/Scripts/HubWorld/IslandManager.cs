@@ -1,23 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class IslandManager : MonoBehaviour
 {
-  public Animator transition_animation = null;
-  PuzzleManager puzzle_manager;
-  IslandPuzzleType[] islands_order;
-  Collider2D player_collider;
-  bool loading_scene = false;
+  public Animator transitionAnimation = null;
+  PuzzleManager puzzleManager;
+  IslandPuzzleType[] islandsOrder;
+  Collider2D playerCollider;
+  bool loadingScene = false;
   GameObject[] islands;
-  GameObject cloud_boundary = null;
-  readonly string activation_key = "space";
+  GameObject cloudBoundary = null;
+  readonly string activationKey = "space";
   
   static void hideLock(GameObject island)
   {
     foreach (Transform child in island.transform)
     {
-      if (child.tag == "IslandLock")
+      if (child.CompareTag("IslandLock"))
       {
         child.gameObject.SetActive(false);
         break;
@@ -29,7 +30,7 @@ public class IslandManager : MonoBehaviour
   {
     foreach (Transform child in island.transform)
     {
-      if (child.tag == "WireGreen")
+      if (child.CompareTag("WireGreen"))
       {
         child.gameObject.GetComponent<SpriteRenderer>().enabled = true;
         break;
@@ -41,7 +42,7 @@ public class IslandManager : MonoBehaviour
   {
     foreach (Transform child in island.transform)
     {
-      if (child.tag == "WireRed")
+      if (child.CompareTag("WireRed"))
       {
         child.gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
         break;
@@ -51,74 +52,74 @@ public class IslandManager : MonoBehaviour
   
   void setPlayerPosition()
   {
-    Vector3? player_position = puzzle_manager.savedPlayerPosition();
-    if (player_position != null)
-      GameObject.Find("PlayerShip").transform.position = player_position.Value;
+    Vector3? playerPosition = puzzleManager.savedPlayerPosition();
+    if (playerPosition != null)
+      GameObject.Find("PlayerShip").transform.position = playerPosition.Value;
   }
   
   void Start()
   {
-    puzzle_manager = GameObject.Find("PuzzleManager").GetComponent<PuzzleManager>();
-    islands_order = puzzle_manager.islands_order;
-    player_collider = GameObject.FindWithTag("Player").GetComponent<Collider2D>();
-    UnityEngine.Assertions.Assert.AreNotEqual(transition_animation, null);
-    puzzle_manager.setTransitionAnimation(transition_animation);
+    puzzleManager = GameObject.Find("PuzzleManager").GetComponent<PuzzleManager>();
+    islandsOrder = puzzleManager.islandsOrder;
+    playerCollider = GameObject.FindWithTag("Player").GetComponent<Collider2D>();
+    UnityEngine.Assertions.Assert.AreNotEqual(transitionAnimation, null);
+    puzzleManager.setTransitionAnimation(transitionAnimation);
     
     setPlayerPosition();
     
-    islands = new GameObject[islands_order.Length];
+    islands = new GameObject[islandsOrder.Length];
     int i = 0;
-    int current_island = puzzle_manager.getCurrentIsland();
-    foreach (IslandPuzzleType island_puzzle_type in islands_order)
+    int currentIsland = puzzleManager.getCurrentIsland();
+    foreach (IslandPuzzleType islandPuzzleType in islandsOrder)
     {
-      islands[i] = GameObject.FindWithTag(island_puzzle_type.ToString());
+      islands[i] = GameObject.FindWithTag(islandPuzzleType.ToString());
       UnityEngine.Assertions.Assert.AreNotEqual(islands[i], null);
       islands[i].GetComponent<CircleCollider2D>().enabled = false;
-      if (i < current_island)
+      if (i < currentIsland)
       {
         hideLock(islands[i]);
-        activateGreenWire(islands[i]);
+        //activateGreenWire(islands[i]);
       }
       ++i;
     }
     
-    if (current_island < islands.Length)
+    if (currentIsland < islands.Length)
     {
-      hideLock(islands[current_island]);
-      activateRedWire(islands[current_island]);
-      islands[current_island].GetComponent<CircleCollider2D>().enabled = true;
+      hideLock(islands[currentIsland]);
+      //activateRedWire(islands[currentIsland]);
+      islands[currentIsland].GetComponent<CircleCollider2D>().enabled = true;
     }
 
-    if (current_island > 0 && puzzle_manager.isReturningFromIsland())
+    if (currentIsland > 0 && puzzleManager.isReturningFromIsland())
     {
-      activateGreenWire(islands[current_island-1]);
-      Vector3 new_position = islands[current_island-1].transform.position;
-      GameObject.Find("PlayerShip").transform.position = new_position;
-      puzzle_manager.saveGame(new_position);
+      //activateGreenWire(islands[currentIsland-1]);
+      Vector3 newPosition = islands[currentIsland-1].transform.position;
+      GameObject.Find("PlayerShip").transform.position = newPosition;
+      puzzleManager.saveGame(newPosition);
     }
     
-    if (current_island >= islands.Length)
+    if (currentIsland >= islands.Length)
     {
       GameObject.Find("Clouds1").SetActive(false);
-      cloud_boundary = GameObject.FindWithTag("CloudBoundary");
-      cloud_boundary.GetComponent<EdgeCollider2D>().enabled = false;
-      cloud_boundary.GetComponent<CircleCollider2D>().enabled = true;
-      loading_scene = true;
+      cloudBoundary = GameObject.FindWithTag("CloudBoundary");
+      cloudBoundary.GetComponent<EdgeCollider2D>().enabled = false;
+      cloudBoundary.GetComponent<CircleCollider2D>().enabled = true;
+      loadingScene = true;
     }
   }
 
   void Update()
   {
-    if (!loading_scene)
+    if (!loadingScene)
     {
-      int current_island = puzzle_manager.getCurrentIsland();
-      if (current_island < islands.Length
-          && player_collider.IsTouching(islands[current_island].GetComponent<Collider2D>()))
+      int currentIsland = puzzleManager.getCurrentIsland();
+      if (currentIsland < islands.Length
+          && playerCollider.IsTouching(islands[currentIsland].GetComponent<Collider2D>()))
       {
-        if (Input.GetKeyDown(activation_key))
+        if (Input.GetKeyDown(activationKey))
         {
-          loading_scene = true;
-          puzzle_manager.loadPuzzle();
+          loadingScene = true;
+          puzzleManager.loadPuzzle();
         }
       }
     }

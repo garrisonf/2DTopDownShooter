@@ -2,26 +2,27 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class LightPuzzle : MonoBehaviour
 {
   public int width;
   public int height;
-  public Animator transition_animation = null;
-  public static bool loading_scene;
+  public Animator transitionAnimation = null;
+  public static bool loadingScene;
   BoxTile[] boxes;
-  PuzzleLoader puzzle_loader;
-  readonly string reset_key = "r";
+  PuzzleLoader puzzleLoader;
+  readonly string resetKey = "r";
   
   void Start()
   {
     boxes = new BoxTile[width * height];
-    Transform box_group = this.gameObject.transform.Find("Boxes");
+    Transform boxGroup = this.gameObject.transform.Find("Boxes");
     
-    UnityEngine.Assertions.Assert.AreEqual(width * height, box_group.childCount);
-    UnityEngine.Assertions.Assert.AreNotEqual(transition_animation, null);
+    UnityEngine.Assertions.Assert.AreEqual(width * height, boxGroup.childCount);
+    UnityEngine.Assertions.Assert.AreNotEqual(transitionAnimation, null);
     
-    for (int i = 0; i < box_group.childCount; ++i)
+    for (int i = 0; i < boxGroup.childCount; ++i)
     {
       BoxTile[] neighbors = new BoxTile[4]{null, null, null, null};
       int j = 0;
@@ -29,35 +30,35 @@ public class LightPuzzle : MonoBehaviour
       int col = i - row * width;
       
       if (row > 0)        // add up
-        neighbors[j++] = box_group.GetChild(i-width).GetComponent<BoxTile>();
+        neighbors[j++] = boxGroup.GetChild(i-width).GetComponent<BoxTile>();
       if (row < height-1) // add down
-        neighbors[j++] = box_group.GetChild(i+width).GetComponent<BoxTile>();
+        neighbors[j++] = boxGroup.GetChild(i+width).GetComponent<BoxTile>();
       if (col > 0)        // add left
-        neighbors[j++] = box_group.GetChild(i-1).GetComponent<BoxTile>();
+        neighbors[j++] = boxGroup.GetChild(i-1).GetComponent<BoxTile>();
       if (col < width-1) // add right
-        neighbors[j++] = box_group.GetChild(i+1).GetComponent<BoxTile>();
+        neighbors[j++] = boxGroup.GetChild(i+1).GetComponent<BoxTile>();
       
-      boxes[i] = box_group.GetChild(i).GetComponent<BoxTile>();
+      boxes[i] = boxGroup.GetChild(i).GetComponent<BoxTile>();
       boxes[i].setNeighbors(neighbors);
     }
     
-    loading_scene = false;
-    puzzle_loader = GameObject.Find("PuzzleManager").GetComponent<PuzzleManager>().puzzle_loaders[IslandPuzzleType.LightPuzzleIsland];
+    loadingScene = false;
+    puzzleLoader = GameObject.Find("PuzzleManager").GetComponent<PuzzleManager>().PuzzleLoaders[IslandPuzzleType.LightPuzzleIsland];
   }
   
   void Update()
   {
-    if (!loading_scene && boxes.All(x => x.activated))
+    if (!loadingScene && boxes.All(x => x.activated))
     {
-      loading_scene = true;
-      puzzle_loader.loadNextPuzzle(transition_animation);
+      loadingScene = true;
+      puzzleLoader.loadNextPuzzle(transitionAnimation);
     }
     
-    if (!loading_scene && Input.GetKeyDown(reset_key))
+    if (!loadingScene && Input.GetKeyDown(resetKey))
       foreach (BoxTile box in boxes)
         box.activated = false;
     
-    if (!loading_scene && Input.GetKeyDown("p")) // REMOVE THIS
+    if (!loadingScene && Input.GetKeyDown("p")) // REMOVE THIS
       foreach (BoxTile box in boxes)
         box.activated = true;
   }
