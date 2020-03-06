@@ -11,7 +11,6 @@ public class IslandManager : MonoBehaviour
   Collider2D playerCollider;
   bool loadingScene = false;
   GameObject[] islands;
-  GameObject cloudBoundary = null;
   readonly string activationKey = "space";
   
   static void hideLock(GameObject island)
@@ -101,9 +100,9 @@ public class IslandManager : MonoBehaviour
     if (currentIsland >= islands.Length)
     {
       GameObject.Find("Clouds1").SetActive(false);
-      cloudBoundary = GameObject.FindWithTag("CloudBoundary");
-      cloudBoundary.GetComponent<EdgeCollider2D>().enabled = false;
-      cloudBoundary.GetComponent<CircleCollider2D>().enabled = true;
+      GameObject worldBorder = GameObject.FindWithTag("WorldBorder");
+      worldBorder.GetComponent<EdgeCollider2D>().enabled = false;
+      worldBorder.GetComponent<CircleCollider2D>().enabled = true;
       loadingScene = true;
     }
   }

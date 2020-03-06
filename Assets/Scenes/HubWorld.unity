@@ -2349,6 +2349,84 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 493566977}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &499550483
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 499550485}
+  - component: {fileID: 499550484}
+  - component: {fileID: 499550486}
+  m_Layer: 0
+  m_Name: WorldBorder
+  m_TagString: WorldBorder
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!58 &499550484
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 499550483}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 35
+--- !u!4 &499550485
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 499550483}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -20.19142}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 678703472}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!68 &499550486
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 499550483}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: 16.574398, y: 36.926125}
+  - {x: 32.19988, y: 18.022764}
+  - {x: 37.229, y: 2.3235755}
+  - {x: 37.067024, y: -16.67265}
+  - {x: 22.094246, y: -33.811787}
+  - {x: 7.5461454, y: -37.246655}
+  - {x: -11.07782, y: -31.45123}
+  - {x: -26.588337, y: -25.038454}
+  - {x: -34.788826, y: -9.546045}
+  - {x: -36.34197, y: 10.549441}
+  - {x: -31.33023, y: 23.915457}
+  - {x: -13.181972, y: 31.233465}
+  - {x: 1.8202763, y: 34.97173}
+  - {x: 21.137312, y: 34.909264}
 --- !u!1 &513877232
 GameObject:
   m_ObjectHideFlags: 0
@@ -2446,7 +2524,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 565e73b3c7edc6beb9cb7134aa00c947, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transition_animation: {fileID: 1765842020}
+  transitionAnimation: {fileID: 1765842020}
 --- !u!58 &513877235
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -17210,7 +17288,7 @@ GameObject:
   - component: {fileID: 678703474}
   m_Layer: 0
   m_Name: CloudBoundaryContainer
-  m_TagString: CloudBoundary
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17228,6 +17306,7 @@ Transform:
   m_Children:
   - {fileID: 738654936}
   - {fileID: 1140247366}
+  - {fileID: 499550485}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -17254,7 +17333,7 @@ EdgeCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 678703471}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0

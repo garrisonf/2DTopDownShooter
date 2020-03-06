@@ -8,7 +8,6 @@ TagManager:
   - LightPuzzleIsland
   - Reflector
   - Receiver
-  - CloudBoundary
   - Boundary
   - LaserPuzzleIsland
   - IslandLock
@@ -16,6 +15,7 @@ TagManager:
   - WireGreen
   - VerticalBar
   - SwitchPuzzleIsland
+  - WorldBorder
   layers:
   - Default
   - TransparentFX
