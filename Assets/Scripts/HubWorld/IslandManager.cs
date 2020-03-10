@@ -11,7 +11,9 @@ public class IslandManager : MonoBehaviour
   Collider2D playerCollider;
   bool loadingScene = false;
   GameObject[] islands;
-  readonly string activationKey = "space";
+  const string ActivationKey = "space";
+  string[] timeLights = { "noonLight", "sunsetLight", "midnightLight", "dawnLight" };
+  int[] turbineSpeeds = { 10, 50, 150, 200 };
   
   static void hideLock(GameObject island)
   {
@@ -54,6 +56,29 @@ public class IslandManager : MonoBehaviour
     Vector3? playerPosition = puzzleManager.savedPlayerPosition();
     if (playerPosition != null)
       GameObject.Find("PlayerShip").transform.position = playerPosition.Value;
+  }
+
+  void setTimeLight(int currentIsland)
+  {
+    UnityEngine.Assertions.Assert.IsFalse(currentIsland >= timeLights.Length);
+    for (int i = 0; i < timeLights.Length; ++i)
+    {
+      if (i != currentIsland)
+        GameObject.Find(timeLights[i]).SetActive(false);
+    }
+
+    if (timeLights[currentIsland] != "midnightLight")
+    {
+      GameObject.Find("Spot Light").SetActive(false);
+      if (timeLights[currentIsland] != "sunsetLight")
+        GameObject.Find("VolumetricLight").SetActive(false);
+    }
+  }
+
+  void setTurbineSpeed(int currentIsland)
+  {
+    UnityEngine.Assertions.Assert.IsFalse(currentIsland >= turbineSpeeds.Length);
+    GameObject.Find("TurbinePropellor").GetComponent<PropellorRotation>().rotateSpeed = turbineSpeeds[currentIsland];
   }
   
   void Start()
@@ -105,6 +130,9 @@ public class IslandManager : MonoBehaviour
       worldBorder.GetComponent<CircleCollider2D>().enabled = true;
       loadingScene = true;
     }
+    
+    setTimeLight(currentIsland);
+    setTurbineSpeed(currentIsland);
   }
 
   void Update()
@@ -115,7 +143,7 @@ public class IslandManager : MonoBehaviour
       if (currentIsland < islands.Length
           && playerCollider.IsTouching(islands[currentIsland].GetComponent<Collider2D>()))
       {
-        if (Input.GetKeyDown(activationKey))
+        if (Input.GetKeyDown(ActivationKey))
         {
           loadingScene = true;
           puzzleManager.loadPuzzle();

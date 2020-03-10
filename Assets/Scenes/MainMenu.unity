@@ -1546,12 +1546,8 @@ MonoBehaviour:
   - LightPuzzle5x5Hard
   laserPuzzleScenes:
   - LaserPuzzleEasy
-  - LaserPuzzleMedium
-  - LaserPuzzleHard
   switchPuzzleScenes:
   - SwitchPuzzleEasy
-  - SwitchPuzzleMedium
-  - SwitchPuzzleHard
 --- !u!4 &961240935
 Transform:
   m_ObjectHideFlags: 0

@@ -661,7 +661,7 @@ GameObject:
   m_Component:
   - component: {fileID: 133079127}
   m_Layer: 0
-  m_Name: noon
+  m_Name: noonLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1999,12 +1999,12 @@ GameObject:
   m_Component:
   - component: {fileID: 411960621}
   m_Layer: 0
-  m_Name: dawn
+  m_Name: dawnLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &411960621
 Transform:
   m_ObjectHideFlags: 0
@@ -18824,12 +18824,12 @@ GameObject:
   m_Component:
   - component: {fileID: 943480523}
   m_Layer: 0
-  m_Name: sunset
+  m_Name: sunsetLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &943480523
 Transform:
   m_ObjectHideFlags: 0
@@ -21508,12 +21508,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1644323758}
   m_Layer: 0
-  m_Name: midnight
+  m_Name: midnightLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1644323758
 Transform:
   m_ObjectHideFlags: 0
