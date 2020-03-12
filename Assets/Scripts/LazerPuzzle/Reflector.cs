@@ -33,7 +33,7 @@ public class Reflector : MonoBehaviour
         if(GetComponent<Collider2D>().IsTouching(GameObject.FindWithTag("Player").GetComponent<Collider2D>()))
         {
             //If the user presses space and rotation is allowed (prevent spam)
-            if(Input.GetKeyDown("space") && rotationAllowed)
+            if((Input.GetKeyDown("space") || Input.GetButtonDown("Jump")) && rotationAllowed)
             {
                 //prevent buffered/spammed rotations while rotating for 1 second
                 rotationAllowed = false;

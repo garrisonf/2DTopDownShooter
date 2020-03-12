@@ -11,6 +11,8 @@ public class PlayerDashMechanic : MonoBehaviour
     public float dashTime = 0;
     public float speedModifier = 1;
     public float dashCoolDown = 0;
+    public bool dashButtonAllowed = true;
+    public bool dashAllowed = true;
 
     // Start is called before the first frame update
     void Start()
@@ -35,11 +37,26 @@ public class PlayerDashMechanic : MonoBehaviour
     void Update()
     {
         Vector2 forwardDash = m_MainCamera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-        if (Input.GetKeyDown(KeyCode.LeftShift) && dashCoolDown >= 0.5f)
+        //if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetButtonDown("Dash")) && dashCoolDown >= 0.8f)
+        //{
+         //   dashTime = 0.1f;
+         //  dashCoolDown = 0;
+        //}
+        
+        if (Input.GetButtonDown("Dash") && dashCoolDown >= 0.8f && dashButtonAllowed && dashAllowed)
         {
             dashTime = 0.1f;
             dashCoolDown = 0;
+            dashButtonAllowed = false;
+            dashAllowed = false;
+            StartCoroutine(waitForDash());
         }
+        
+        if(dashButtonAllowed && !Input.GetButton("Dash"))
+        {
+           dashAllowed = true;
+        }
+        
         if (dashTime > 0)
         {
             GetComponent<TrailRenderer>().material.color = new Color(0f, 0f, 200f);
@@ -70,6 +87,12 @@ public class PlayerDashMechanic : MonoBehaviour
         dashCoolDown += Time.deltaTime;
 
        
+    }
+    
+    IEnumerator waitForDash()
+    {
+       yield return new WaitForSeconds(0.8f);
+       dashButtonAllowed = true;
     }
 
 }

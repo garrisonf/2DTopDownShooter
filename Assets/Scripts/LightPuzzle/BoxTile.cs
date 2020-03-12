@@ -25,7 +25,7 @@ public class BoxTile : MonoBehaviour
   {
     if (!LightPuzzle.loadingScene && GetComponent<Collider2D>().IsTouching(playerCollider))
     {
-      if (Input.GetKeyDown(activationKey))
+      if (Input.GetKeyDown(activationKey) || Input.GetButtonDown("Jump"))
       {
         activated = !activated;
         foreach (BoxTile neighbor in neighbors)

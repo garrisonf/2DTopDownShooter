@@ -143,7 +143,7 @@ public class IslandManager : MonoBehaviour
       if (currentIsland < islands.Length
           && playerCollider.IsTouching(islands[currentIsland].GetComponent<Collider2D>()))
       {
-        if (Input.GetKeyDown(ActivationKey))
+        if (Input.GetKeyDown(ActivationKey) || Input.GetButtonDown("Jump"))
         {
           loadingScene = true;
           puzzleManager.loadPuzzle();

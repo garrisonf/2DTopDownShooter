@@ -464,8 +464,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000022888, y: -80}
-  m_SizeDelta: {x: 441.9, y: 82.1}
+  m_AnchoredPosition: {x: -1.25, y: -85.46}
+  m_SizeDelta: {x: 439.41, y: 170.93}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &584677620
 MonoBehaviour:
@@ -500,9 +500,21 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'Developed by:
 
-    Garrison Finley, Ryan Hartanto
+    Garrison Finley - Producer
 
-    Jaydev Patel, Sungwon Son'
+    Jaydev Patel - Programmer
+
+    Ah Lon Sin - Artist, Programmer
+
+    Jessica Souza - Programmer
+
+    Brigitte Giles - Artist
+
+    Ethan Flaker - Designer
+
+
+
+'
 --- !u!222 &584677621
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -810,7 +822,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000010824, y: 44.500004}
+  m_AnchoredPosition: {x: 0.000010824, y: 92.5}
   m_SizeDelta: {x: 637.2, y: 137.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &952088796
@@ -1068,7 +1080,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000010824, y: -70}
+  m_AnchoredPosition: {x: 0.000010824, y: -27.099995}
   m_SizeDelta: {x: 460.6, y: 187.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1947078603
@@ -1249,7 +1261,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.4, y: -22.68}
+  m_AnchoredPosition: {x: -0.000037968, y: 13.8}
   m_SizeDelta: {x: 392.38, y: 3.27}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2039102835

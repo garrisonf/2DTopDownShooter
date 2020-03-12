@@ -40,7 +40,7 @@ public class Laser : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       if(!loadingScene && Input.GetKeyDown("r"))
+       if(!loadingScene && Input.GetKeyDown("r") || ((Input.GetButtonDown("Reset1")) && (Input.GetButtonDown("Reset2")) && (Input.GetButtonDown("Reset3")) && (Input.GetButtonDown("Reset4")) ))
        {
           Debug.Log("Laser Destroyed");
           destroyLaser();
@@ -145,7 +145,7 @@ public class Laser : MonoBehaviour
     {
        if(GetComponent<Collider2D>().IsTouching(GameObject.FindWithTag("Player").GetComponent<Collider2D>()))
        {
-          if(Input.GetKeyDown("space"))
+          if(Input.GetKeyDown("space") || Input.GetButtonDown("Jump"))
           {
              laserStarted = true;
              lineRend.enabled = true;

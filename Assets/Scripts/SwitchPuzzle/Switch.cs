@@ -25,7 +25,7 @@ public class Switch : MonoBehaviour
         if(inputAllowed && !verticalBar.loadingScene && GetComponent<Collider2D>().IsTouching(GameObject.FindWithTag("Player").GetComponent<Collider2D>()))
         {
             // If the user presses space
-            if(Input.GetKeyDown("space"))
+            if(Input.GetKeyDown("space") || Input.GetButtonDown("Jump"))
             {
                StartCoroutine(waitForSwitch());
                //GameObject.FindWithTag("VerticalBar").GetComponent<Slider>().value += 0.2f;

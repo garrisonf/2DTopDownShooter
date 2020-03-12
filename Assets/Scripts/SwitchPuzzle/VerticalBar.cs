@@ -79,7 +79,7 @@ public class VerticalBar : MonoBehaviour
           }
  
           //If the user presses r
-          if(Input.GetKeyDown("r"))
+          if(Input.GetKeyDown("r") || ((Input.GetButtonDown("Reset1")) && (Input.GetButtonDown("Reset2")) && (Input.GetButtonDown("Reset3")) && (Input.GetButtonDown("Reset4")) ))
           {
              Debug.Log("Reset Puzzle!");
              resetProgress();

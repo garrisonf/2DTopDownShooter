@@ -49,7 +49,7 @@ public class SlidingReflector : MonoBehaviour
         if(GetComponent<Collider2D>().IsTouching(GameObject.FindWithTag("Player").GetComponent<Collider2D>()))
         {
             //If the user presses space and translation is allowed (prevent spam)
-            if(Input.GetKeyDown("space") && translationAllowed)
+            if((Input.GetKeyDown("space") || Input.GetButtonDown("Jump")) && translationAllowed)
             {
                 //prevent buffered/spammed tranlations
                 translationAllowed = false;

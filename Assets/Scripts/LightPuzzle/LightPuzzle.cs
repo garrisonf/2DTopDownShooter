@@ -54,12 +54,12 @@ public class LightPuzzle : MonoBehaviour
       puzzleLoader.loadNextPuzzle(transitionAnimation);
     }
     
-    if (!loadingScene && Input.GetKeyDown(resetKey))
+    if (!loadingScene && Input.GetKeyDown(resetKey) || ((Input.GetButtonDown("Reset1")) && (Input.GetButtonDown("Reset2")) && (Input.GetButtonDown("Reset3")) && (Input.GetButtonDown("Reset4")) ))
       foreach (BoxTile box in boxes)
         box.activated = false;
     
-    if (!loadingScene && Input.GetKeyDown("p")) // REMOVE THIS
-      foreach (BoxTile box in boxes)
-        box.activated = true;
+    //if (!loadingScene && Input.GetKeyDown("p")) // REMOVE THIS
+      //foreach (BoxTile box in boxes)
+        //box.activated = true;
   }
 }

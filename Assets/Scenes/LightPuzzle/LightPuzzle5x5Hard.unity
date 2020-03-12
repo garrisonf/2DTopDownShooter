@@ -3956,6 +3956,7 @@ GameObject:
   - component: {fileID: 1958120548}
   - component: {fileID: 1958120547}
   - component: {fileID: 1958120545}
+  - component: {fileID: 1958120546}
   m_Layer: 0
   m_Name: PlayerShip
   m_TagString: Player
@@ -4067,6 +4068,22 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!114 &1958120546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1958120544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fe92f65fefd7424c9e0cbdbeed9986d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementScript: {fileID: 1958120550}
+  dashTime: 0
+  speedModifier: 1
+  dashCoolDown: 0
 --- !u!58 &1958120547
 CircleCollider2D:
   m_ObjectHideFlags: 0
