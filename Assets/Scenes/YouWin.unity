@@ -464,8 +464,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1.25, y: -85.46}
-  m_SizeDelta: {x: 439.41, y: 170.93}
+  m_AnchoredPosition: {x: -1.25, y: -107.4}
+  m_SizeDelta: {x: 439.4, y: 214.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &584677620
 MonoBehaviour:
@@ -511,6 +511,8 @@ MonoBehaviour:
     Brigitte Giles - Artist
 
     Ethan Flaker - Designer
+
+    Gavin Gnaster - Writer
 
 
 

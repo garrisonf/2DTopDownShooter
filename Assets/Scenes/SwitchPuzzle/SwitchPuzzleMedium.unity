@@ -1683,7 +1683,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 98949ce2106be7c48b6c24cc540f20a4, type: 3}
+  m_audioClip: {fileID: 8300000, guid: dc40b4dd824ea8044b3af5436ef30569, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.5
   m_Pitch: 1
@@ -1961,6 +1961,8 @@ MonoBehaviour:
   dashTime: 0
   speedModifier: 1
   dashCoolDown: 0
+  dashButtonAllowed: 1
+  dashAllowed: 1
 --- !u!58 &2049016037
 CircleCollider2D:
   m_ObjectHideFlags: 0
